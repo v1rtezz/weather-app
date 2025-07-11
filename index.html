@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="./icons/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <script type="module" crossorigin src="./assets/index-BeU4nfLn.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DdyJiakI.css">
+  </head>
+  <body>
+    <div class="app">
+      <section class="heading">
+        <img
+          class="logo"
+          src="./icons/logo.png"
+          alt=""
+          width="100"
+          height="100"
+        />
+        <h1 class="heading__title">
+          Забудь о неожиданном&nbsp;дожде с&nbsp;Weather App!
+        </h1>
+      </section>
+      <section class="search">
+        <form class="search__form">
+          <input
+            type="text"
+            class="search__input"
+            data-search-input
+            placeholder="Нью-Йорк, Соединенные штаты Америки"
+          />
+
+          <button type="submit" class="search__btn">
+            <svg
+              width="50px"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  opacity="0.1"
+                  d="M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+                  fill="none"
+                ></path>
+                <path
+                  d="M15 15L21 21"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+                  stroke-width="2"
+                ></path>
+              </g>
+            </svg>
+          </button>
+        </form>
+      </section>
+
+      <section class="current">
+        <div class="current__heading">
+          <div class="current__city">Нью-Йорк</div>
+          <button class="current__btn">
+            <svg
+              viewBox="0 0 24 24"
+              fill="#fff"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z"
+                  fill="#fff"
+                ></path>
+              </g>
+            </svg>
+          </button>
+        </div>
+        <div class="current__temp">
+          <div class="current__temp-value">22°C</div>
+          <div class="current__temp-icon">
+            <img src="./icons/sunny.svg" alt="" width="50px" />
+          </div>
+        </div>
+        <div class="current__weather-description">Солнечно</div>
+        <div class="current__weather-description">
+          Вероятность дождя: <span data-rain-chanse>да хуй знает бро</span>
+        </div>
+
+        <div class="current__weather-details">
+          <div class="current__weather-detail">
+            <div class="current__weather-detail-label">Ощущается</div>
+            <div class="current__weather-detail-value">25°C</div>
+          </div>
+          <div class="current__weather-detail">
+            <div class="current__weather-detail-label">Влажность</div>
+            <div class="current__weather-detail-value">65%</div>
+          </div>
+          <div class="current__weather-detail">
+            <div class="current__weather-detail-label">Ветер</div>
+            <div class="current__weather-detail-value">12 км/ч</div>
+          </div>
+          <div class="current__weather-detail">
+            <div class="current__weather-detail-label">Давление</div>
+            <div class="current__weather-detail-value">1013 мб</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="hours-forecast">
+        <h2 class="hours-forecast__title title">Погода на сегодня</h2>
+        <div class="forecast-cards">
+          <div class="hours-forecast-card forecast-card">
+            <div>
+              <h3 class="hours-forecast-title forecast-card-title">3:00</h3>
+              <div class="hours-forecast-card-deg forecast-card-deg">
+                25&deg;C
+              </div>
+            </div>
+            <img src="./icons/sunny.svg" alt="" />
+          </div>
+          <div class="hours-forecast-card forecast-card">
+            <div>
+              <h3 class="hours-forecast-title forecast-card-title">6:00</h3>
+              <div class="hours-forecast-card-deg forecast-card-deg">
+                25&deg;C
+              </div>
+            </div>
+            <img src="./icons/sunny.svg" alt="" />
+          </div>
+          <div class="hours-forecast-card forecast-card">
+            <div>
+              <h3 class="hours-forecast-title forecast-card-title">9:00</h3>
+              <div class="hours-forecast-card-deg forecast-card-deg">
+                25&deg;C
+              </div>
+            </div>
+            <img src="./icons/sunny.svg" alt="" />
+          </div>
+          <div class="hours-forecast-card forecast-card">
+            <div>
+              <h3 class="hours-forecast-title forecast-card-title">12:00</h3>
+              <div class="hours-forecast-card-deg forecast-card-deg">
+                25&deg;C
+              </div>
+            </div>
+            <img src="./icons/sunny.svg" alt="" />
+          </div>
+          <div class="hours-forecast-card forecast-card">
+            <div>
+              <h3 class="hours-forecast-title forecast-card-title">15:00</h3>
+              <div class="hours-forecast-card-deg forecast-card-deg">
+                25&deg;C
+              </div>
+            </div>
+            <img src="./icons/sunny.svg" alt="" />
+          </div>
+          <div class="hours-forecast-card forecast-card">
+            <div>
+              <h3 class="hours-forecast-title forecast-card-title">18:00</h3>
+              <div class="hours-forecast-card-deg forecast-card-deg">
+                25&deg;C
+              </div>
+            </div>
+            <img src="./icons/sunny.svg" alt="" />
+          </div>
+          <div class="hours-forecast-card forecast-card">
+            <div>
+              <h3 class="hours-forecast-title forecast-card-title">21:00</h3>
+              <div class="hours-forecast-card-deg forecast-card-deg">
+                25&deg;C
+              </div>
+            </div>
+            <img src="./icons/sunny.svg" alt="" />
+          </div>
+          <div class="hours-forecast-card forecast-card">
+            <div>
+              <h3 class="hours-forecast-title forecast-card-title">00:00</h3>
+              <div class="hours-forecast-card-deg forecast-card-deg">
+                25&deg;C
+              </div>
+            </div>
+            <img src="./icons/sunny.svg" alt="" />
+          </div>
+        </div>
+      </section>
+
+      <section class="weekly-forecast">
+        <h2 class="weekly-forecast__title title">Погода на неделю</h2>
+        <div class="weekly-forecast-cards forecast-cards">
+          <div class="weekly-forecast-card forecast-card">
+            <div>
+              <h3 class="weekly-forecast-title forecast-card-title">ПН</h3>
+              <div class="weekly-forecast-card-deg forecast-card-deg">
+                25&deg;C
+              </div>
+            </div>
+            <img src="./icons/sunny.svg" alt="" />
+          </div>
+          <div class="weekly-forecast-card forecast-card">
+            <div>
+              <h3 class="weekly-forecast-title forecast-card-title">ПН</h3>
+              <div class="weekly-forecast-card-deg forecast-card-deg">
+                25&deg;C
+              </div>
+            </div>
+            <img src="./icons/sunny.svg" alt="" />
+          </div>
+          <div class="weekly-forecast-card forecast-card">
+            <div>
+              <h3 class="weekly-forecast-title forecast-card-title">ПН</h3>
+              <div class="weekly-forecast-card-deg forecast-card-deg">
+                25&deg;C
+              </div>
+            </div>
+            <img src="./icons/sunny.svg" alt="" />
+          </div>
+          <div class="weekly-forecast-card forecast-card">
+            <div>
+              <h3 class="weekly-forecast-title forecast-card-title">ПН</h3>
+              <div class="weekly-forecast-card-deg forecast-card-deg">
+                25&deg;C
+              </div>
+            </div>
+            <img src="./icons/sunny.svg" alt="" />
+          </div>
+          <div class="weekly-forecast-card forecast-card">
+            <div>
+              <h3 class="weekly-forecast-title forecast-card-title">ПН</h3>
+              <div class="weekly-forecast-card-deg forecast-card-deg">
+                25&deg;C
+              </div>
+            </div>
+            <img src="./icons/sunny.svg" alt="" />
+          </div>
+          <div class="weekly-forecast-card forecast-card">
+            <div>
+              <h3 class="weekly-forecast-title forecast-card-title">ПН</h3>
+              <div class="weekly-forecast-card-deg forecast-card-deg">
+                25&deg;C
+              </div>
+            </div>
+            <img src="./icons/sunny.svg" alt="" />
+          </div>
+          <div class="weekly-forecast-card forecast-card">
+            <div>
+              <h3 class="weekly-forecast-title forecast-card-title">ПН</h3>
+              <div class="weekly-forecast-card-deg forecast-card-deg">
+                25&deg;C
+              </div>
+            </div>
+            <img src="./icons/sunny.svg" alt="" />
+          </div>
+        </div>
+      </section>
+
+      <section class="features">
+        <h2 class="features__title title">Избранные города</h2>
+        <div class="features__cards">
+          <div class="features__card">
+            <div class="features__card-left">
+              <h3 class="features__card-title">Берлин</h3>
+              <p class="features__card-deg">30&deg; градусов</p>
+              <p class="features__card-rain-chance">
+                Вероятность дождя: да хуй знает чесслово
+              </p>
+            </div>
+            <div class="features__card-right">
+              <img src="./icons/sunny.svg" alt="" class="features__card-img">
+            </div>
+          </div>
+           <div class="features__card">
+            <div class="features__card-left">
+              <h3 class="features__card-title">Дубай</h3>
+              <p class="features__card-deg">30&deg; градусов</p>
+              <p class="features__card-rain-chance">
+                Вероятность дождя: да хуй знает чесслово
+              </p>
+            </div>
+            <div class="features__card-right">
+              <img src="./icons/sunny.svg" alt="" class="features__card-img">
+            </div>
+          </div>
+           <div class="features__card">
+            <div class="features__card-left">
+              <h3 class="features__card-title">Киев</h3>
+              <p class="features__card-deg">30&deg; градусов</p>
+              <p class="features__card-rain-chance">
+                Вероятность дождя: да хуй знает чесслово
+              </p>
+            </div>
+            <div class="features__card-right">
+              <img src="./icons/sunny.svg" alt="" class="features__card-img">
+            </div>
+          </div>
+           <div class="features__card">
+            <div class="features__card-left">
+              <h3 class="features__card-title">Москва</h3>
+              <p class="features__card-deg">30&deg; градусов</p>
+              <p class="features__card-rain-chance">
+                Вероятность дождя: да хуй знает чесслово
+              </p>
+            </div>
+            <div class="features__card-right">
+              <img src="./icons/sunny.svg" alt="" class="features__card-img">
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
