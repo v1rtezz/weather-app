@@ -1,0 +1,60 @@
+@import '@a1rth/css-normalize';
+@import url('https://fonts.googleapis.com/css2?family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap');
+:root {
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family:
+    -apple-system, 'TikTok Sans', BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--neutral-color-100);
+  background-color: var(--neutral-color-10);
+  padding: 50px 0;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+.title {
+  margin-bottom: 10px;
+  font-size: 30px;
+}
+
+.forecast-cards {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.forecast-card {
+  display: flex;
+  align-items: start;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 10px 20px;
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.25),
+    0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+.forecast-card img {
+  width: 35px;
+}
+.forecast-card-title {
+  max-width: 45px;
+}
+.forecast-card-deg {
+  font-size: 20px;
+}
