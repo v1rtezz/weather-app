@@ -8,6 +8,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 body {
   font-family:
     -apple-system, 'TikTok Sans', BlinkMacSystemFont, 'Segoe UI', 'Roboto',
@@ -17,6 +29,10 @@ body {
   color: var(--neutral-color-100);
   background-color: var(--neutral-color-10);
   padding: 50px 0;
+}
+
+.no-scroll {
+  overflow-y: hidden;
 }
 
 section {

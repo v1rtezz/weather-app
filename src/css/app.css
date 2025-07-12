@@ -2,14 +2,19 @@
   background: var(--neutral-color-101);
   backdrop-filter: blur(10px) saturate(180%);
   -webkit-backdrop-filter: blur(10px) saturate(180%);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 16px;
   padding: 15px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow:
     0 2px 8px rgba(0, 0, 0, 0.15),
     0 0 15px rgba(255, 255, 255, 0.07);
   margin: auto auto;
   max-width: 600px;
+}
+
+.app:has(.settings-window--active) {
+  border: none;
+  box-shadow: none;
 }
 
 .logo {
@@ -21,6 +26,7 @@
   align-items: center;
   flex-direction: column;
   gap: 10px;
+  position: relative;
 }
 
 .heading__title {
@@ -68,10 +74,14 @@
 
 .search__btn:hover {
   opacity: 0.7;
+    transform: scale(0.9);
+
 }
 
 .search__btn:active {
   opacity: 0.9;
+    transform: scale(0.95);
+
 }
 
 .current {
@@ -108,10 +118,13 @@
 
 .current__btn:hover {
   opacity: 0.7;
+  transform: scale(0.9);
 }
 
 .current__btn:active {
   opacity: 0.9;
+    transform: scale(0.95);
+
 }
 
 .current__btn--active {
@@ -134,6 +147,19 @@
 .current__weather-description {
   font-size: 26px;
 }
+.current__weather-description p {
+  margin-bottom: 0;
+  display: inline;
+}
+
+.current__weather-description p::after {
+  content: ', ';
+}
+
+.current__weather-description p:last-of-type::after {
+  content: "";
+}
+
 .current__weather-details {
   display: flex;
   gap: 15px;
