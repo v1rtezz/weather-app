@@ -1,5 +1,6 @@
 import type { IResponse } from '../../types/response'
-import { ceil } from '../../types/mathCeil';
+import { ceil } from '../../types/mathCeil'
+import { formatUnixTimeToHHMM } from '../../modules/formatUnixTime'
 
 export const getCurrentWeatherElement = (data: IResponse): string => {
   return `
@@ -30,12 +31,25 @@ export const getCurrentWeatherElement = (data: IResponse): string => {
         <div class="current__temp">
           <div class="current__temp-value">${ceil(data.list[0].main.temp_max)}&deg;C</div>
           <div class="current__temp-icon">
-            <img src="./src/assets/icons/sunny.svg" alt="" width="50px" />
-          </div>
+<img src="https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png" alt="" />          </div>
         </div>
         <div class="current__weather-description">
           <p>${data.list[0].weather[0].description.charAt(0).toUpperCase() + data.list[0].weather[0].description.slice(1)}</p>
         </div>
+         <div class="current__weather-description">
+          <p>Восход: ${formatUnixTimeToHHMM(data.city.sunrise)}</p>
+        </div>
+         <div class="current__weather-description">
+          <p>Закат: ${formatUnixTimeToHHMM(data.city.sunset)}</p>
+        </div>
+
+        ${
+          data.list[0].main.temp >= 40
+            ? `<div class="current__weather-description">
+          <p>Экстремальная жара - смотри не поджарь очко!</p>
+        </div>`
+            : ''
+        }
         <div class="current__weather-description">
           Вероятность дождя: ${data.list[0].pop}%
         </div>

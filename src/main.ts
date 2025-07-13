@@ -15,7 +15,8 @@ const settingsModal = new Modal(
 )
 settingsModal.init()
 
-import './api/api'
+
+// FIXME: убрать await
 const city = encodeURIComponent('Москва')
 const API_URL_WITH_PARAMS = `${CONFIG.API_BASE_URL}?q=${city}&appid=${CONFIG.API_KEY}&units=metric&lang=ru`
 import { Api } from './api/api'
@@ -25,3 +26,5 @@ import { renderCurrentWeather } from './render/renderCurrentWeather'
 const data = await weatherApi.getData()
 renderCurrentWeather(data)
 
+import { renderTimeOfDayIcon } from './modules/renderTimeOfDayIcon'
+renderTimeOfDayIcon(data)
