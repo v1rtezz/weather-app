@@ -1,8 +1,9 @@
-class Modal {
+export class Modal {
   private modal: HTMLElement;
   private modalClassActive: string;
   private openBtn: HTMLElement;
   private closeBtn: HTMLElement;
+  private body = document.body;
   constructor(
     modalSelector: string,
     openBtnSelector: string,
@@ -26,23 +27,15 @@ class Modal {
   init() {
     this.openBtn.addEventListener('click', () => this.toggle());
     this.closeBtn.addEventListener('click', () => this.toggle());
-    document.body.addEventListener('keydown', (key) => {      
+    this.body.addEventListener('keydown', (key) => {
       if (key.code === 'Escape' || key.code === 'Backspace') {
-        this.toggle()
+        this.toggle();
       }
     });
   }
 
   toggle() {
-    console.log(this.modal.classList.toggle(this.modalClassActive));
+    this.modal.classList.toggle(this.modalClassActive);
+    this.body.classList.toggle('no-scroll')
   }
 }
-
-const settingsModal = new Modal(
-  '[data-settings-modal]',
-  '[data-open-settings-modal]',
-  '[data-close-settings-modal]',
-  'settings-window--active',
-);
-
-settingsModal.init();
