@@ -20,6 +20,12 @@
   border: 0;
 }
 
+.time-indicator {
+  position: absolute;
+  left: 25px;
+  top: 25px;
+  width: 70px;
+}
 body {
   font-family:
     -apple-system, 'TikTok Sans', BlinkMacSystemFont, 'Segoe UI', 'Roboto',

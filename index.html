@@ -54,7 +54,7 @@
         </h1>
       </section>
       <section class="search">
-        <form class="search__form">
+        <form class="search__form" data-search-form>
           <label class="hidden" for="search-input">Выберите город</label>
           <input
             name="search-input"
@@ -62,6 +62,7 @@
             class="search__input"
             data-search-input
             placeholder="Нью-Йорк, Соединенные штаты Америки"
+            data-search-input
           />
 
           <button type="submit" class="search__btn">
@@ -97,7 +98,12 @@
             </svg>
           </button>
         </form>
+        <p class="form-message" data-form-message></p>
       </section>
+      <div class="app-render-container" data-app-render-container></div>
+
+      
+     
       <!-- <section class="features">
         <h2 class="features__title title">Избранные города</h2>
         <div class="features__cards">

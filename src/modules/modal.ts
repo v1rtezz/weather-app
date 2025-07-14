@@ -31,7 +31,7 @@ export class Modal {
     this.openBtn.addEventListener('click', () => this.toggle())
     this.closeBtn.addEventListener('click', () => this.toggle())
     this.body.addEventListener('keydown', (key) => {
-      if (key.code === 'Escape' || key.code === 'Backspace') {
+      if (key.code === 'Escape') {
         this.toggle()
       }
     })

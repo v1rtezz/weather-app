@@ -1,12 +1,12 @@
 import { getHoursWeatherElement } from '../components/ui/hoursWeather'
 import type { IResponse } from '../types/response'
 export const renderHoursWeather = (data: IResponse) => {
-  const app: HTMLElement | null = document.querySelector('[data-app]')
-  if (!app) {
+  const appRenderContainer: HTMLElement | null = document.querySelector('[data-app-render-container]')
+  if (!appRenderContainer) {
     return
   }
 
-  app.insertAdjacentHTML(
+  appRenderContainer.insertAdjacentHTML(
     'beforeend',
     `
       <section class="hours-forecast">

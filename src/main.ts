@@ -3,21 +3,10 @@ import './css/general.css'
 import './css/settings.css'
 import './css/app.css'
 
-import { CONFIG } from './config/index'
-import { Api } from './api/api'
+// import { CONFIG } from './config/index'
+import './types/response'
 import { Modal } from './modules/modal'
-import { renderHoursWeather } from './render/renderHoursWeather'
-import { renderCurrentWeather } from './render/renderCurrentWeather'
-import { renderDaysWeather } from './render/renderDaysWeather'
-import { renderTimeOfDayIcon } from './modules/renderTimeOfDayIcon'
-
-// FIXME: убрать await
-const city = encodeURIComponent('Москва')
-const API_URL_WITH_PARAMS = `${CONFIG.API_BASE_URL}?q=${city}&appid=${CONFIG.API_KEY}&units=metric&lang=ru`
-const weatherApi = new Api(API_URL_WITH_PARAMS)
-
-const data = await weatherApi.getData()
-
+import { search } from './modules/search'
 
 const appInit = () => {
   const settingsModal = new Modal(
@@ -28,9 +17,14 @@ const appInit = () => {
     'no-scroll',
   )
   settingsModal.init()
-  renderCurrentWeather(data)
-  renderHoursWeather(data)
-  renderDaysWeather(data)
-  renderTimeOfDayIcon(data)
 }
 appInit()
+
+const form: HTMLFormElement | null =
+  document.querySelector('[data-search-form]')
+
+if (!form) {
+  throw new Error('Отсутствуют обязательные элементы на странице')
+}
+
+form.addEventListener('submit', search)
