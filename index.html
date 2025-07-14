@@ -5,8 +5,8 @@
     <link rel="icon" type="image/png" href="./assets/logo-8x17nMdf.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
-    <script type="module" crossorigin src="./assets/index-Dipw-6dK.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-B8XqRS37.css">
+    <script type="module" crossorigin src="./assets/index-kjrPpRYN.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CYX3Ed-Q.css">
   </head>
   <body>
     <div class="app" data-app>
@@ -55,7 +55,7 @@
         </h1>
       </section>
       <section class="search">
-        <form class="search__form">
+        <form class="search__form" data-search-form>
           <label class="hidden" for="search-input">Выберите город</label>
           <input
             name="search-input"
@@ -63,6 +63,7 @@
             class="search__input"
             data-search-input
             placeholder="Нью-Йорк, Соединенные штаты Америки"
+            data-search-input
           />
 
           <button type="submit" class="search__btn">
@@ -98,7 +99,12 @@
             </svg>
           </button>
         </form>
+        <p class="form-message" data-form-message></p>
       </section>
+      <div class="app-render-container" data-app-render-container></div>
+
+      
+     
       <!-- <section class="features">
         <h2 class="features__title title">Избранные города</h2>
         <div class="features__cards">
