@@ -1,7 +1,7 @@
 import { getHoursWeatherElement } from '../components/ui/hoursWeather'
-import type { IResponse } from '../types/response'
+import type { IResponseItem } from '../types/response'
 import { appRenderContainer } from '../main'
-export const renderHoursWeather = (data: IResponse) => {
+export const renderHoursWeather = (list: IResponseItem[]) => {
   if (!appRenderContainer) {
     return
   }
@@ -21,10 +21,10 @@ export const renderHoursWeather = (data: IResponse) => {
   if (!hoursForecast) {
     return
   }
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < Math.min(6, list.length); i++) {
     hoursForecast.insertAdjacentHTML(
       'beforeend',
-      getHoursWeatherElement(data.list[i]),
+      getHoursWeatherElement(list[i]),
     )
   }
 }

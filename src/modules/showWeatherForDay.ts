@@ -1,10 +1,10 @@
 import { getForecastForDay } from './getForecastForDay'
 import { renderCurrentWeather } from '../render/renderCurrentWeather'
 import { data } from './weatherStore'
+import { getHoursForDay } from './getHoursForDay'
 import { renderDaysWeather } from '../render/renderDaysWeather'
 import { renderTimeOfDayIcon } from './renderTimeOfDayIcon'
 import { renderHoursWeather } from '../render/renderHoursWeather'
-
 
 export const showWeatherForDay = (event: MouseEvent) => {
   const target = event.target as HTMLElement
@@ -19,10 +19,10 @@ export const showWeatherForDay = (event: MouseEvent) => {
 
   if (forecasts.length) {
     renderCurrentWeather(forecasts, data.city)
-    renderHoursWeather(data)
+    const hours = getHoursForDay(data.list, day)
+    renderHoursWeather(hours)
     renderDaysWeather(data)
     renderTimeOfDayIcon(data)
   }
-  console.log(data);
-  
+  console.log(data)
 }

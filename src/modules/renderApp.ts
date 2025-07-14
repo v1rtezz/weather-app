@@ -7,7 +7,7 @@ import { setData } from './weatherStore'
 export const renderApp = function (data: IResponse) {
   setData(data)
   renderCurrentWeather(data.list, data.city)
-  renderHoursWeather(data)
+  renderHoursWeather(data.list.slice(0, 6))
   renderDaysWeather(data)
   renderTimeOfDayIcon(data)
 }
