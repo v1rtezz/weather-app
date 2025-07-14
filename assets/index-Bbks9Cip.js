@@ -69,7 +69,7 @@
             <div>
               <h3 class="hours-forecast-title forecast-card-title">${d(e.dt)}</h3>
               <div class="hours-forecast-card-deg forecast-card-deg">
-                25&deg;C
+                ${c(e.main.temp)}&deg;C
               </div>
             </div>
 <img src="https://openweathermap.org/img/wn/${e.weather[0].icon}@2x.png" alt="" />          </div>
