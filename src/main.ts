@@ -29,6 +29,9 @@ renderCurrentWeather(data)
 import { renderHoursWeather } from './render/renderHoursWeather'
 renderHoursWeather(data)
 
+import { renderDaysWeather } from './render/renderDaysWeather'
+renderDaysWeather(data)
+
 import { renderTimeOfDayIcon } from './modules/renderTimeOfDayIcon'
 renderTimeOfDayIcon(data)
 
