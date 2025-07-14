@@ -3,10 +3,15 @@ import './css/general.css'
 import './css/settings.css'
 import './css/app.css'
 
-// import { CONFIG } from './config/index'
 import './types/response'
 import { Modal } from './modules/modal'
 import { search } from './modules/search'
+import { showWeatherForDay } from './modules/showWeatherForDay'
+
+//FIXME: перенести экспорт
+export const appRenderContainer: HTMLElement | null = document.querySelector(
+  '[data-app-render-container]',
+)
 
 const appInit = () => {
   const settingsModal = new Modal(
@@ -28,3 +33,5 @@ if (!form) {
 }
 
 form.addEventListener('submit', search)
+
+appRenderContainer?.addEventListener('click', showWeatherForDay)

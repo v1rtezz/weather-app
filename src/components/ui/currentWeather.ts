@@ -2,11 +2,16 @@ import type { IResponse } from '../../types/response'
 import { ceil } from '../../modules/mathCeil'
 import { formatUnixTimeToHHMM } from '../../modules/formatUnixTime'
 
-export const getCurrentWeatherElement = (data: IResponse): string => {
+export const getCurrentWeatherElement = (
+  forecasts: IResponse['list'],
+  city: IResponse['city'],
+): string => {
+  const first = forecasts[0]
+
   return `
    <section class="current">
         <div class="current__heading">
-          <div class="current__city">${data.city.name}</div>
+          <div class="current__city">${city.name}</div>
           <button class="current__btn">
             <svg
               viewBox="0 0 24 24"
@@ -29,49 +34,51 @@ export const getCurrentWeatherElement = (data: IResponse): string => {
           </button>
         </div>
         <div class="current__temp">
-          <div class="current__temp-value">${ceil(data.list[0].main.temp_max)}&deg;C</div>
+          <div class="current__temp-value">${ceil(first.main.temp_max)}&deg;C</div>
           <div class="current__temp-icon">
-<img src="https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png" alt="" />          </div>
+            <img src="https://openweathermap.org/img/wn/${first.weather[0].icon}@2x.png" alt="" />
+          </div>
         </div>
         <div class="current__weather-description">
-          <p>${data.list[0].weather[0].description.charAt(0).toUpperCase() + data.list[0].weather[0].description.slice(1)}</p>
+          <p>${first.weather[0].description.charAt(0).toUpperCase() + first.weather[0].description.slice(1)}</p>
         </div>
-         <div class="current__weather-description">
-          <p>Восход: ${formatUnixTimeToHHMM(data.city.sunrise)}</p>
+        <div class="current__weather-description">
+          <p>Восход: ${formatUnixTimeToHHMM(city.sunrise)}</p>
         </div>
-         <div class="current__weather-description">
-          <p>Закат: ${formatUnixTimeToHHMM(data.city.sunset)}</p>
+        <div class="current__weather-description">
+          <p>Закат: ${formatUnixTimeToHHMM(city.sunset)}</p>
         </div>
 
         ${
-          data.list[0].main.temp >= 40
+          first.main.temp >= 40
             ? `<div class="current__weather-description">
-          <p>Экстремальная жара - смотри не поджарь очко!</p>
-        </div>`
+                <p>Экстремальная жара - смотри не поджарь очко!</p>
+              </div>`
             : ''
         }
+
         <div class="current__weather-description">
-          Вероятность дождя: ${ceil(data.list[0].pop * 100)}%
+          Вероятность дождя: ${ceil(first.pop * 100)}%
         </div>
 
         <div class="current__weather-details">
           <div class="current__weather-detail">
             <div class="current__weather-detail-label">Ощущается</div>
-            <div class="current__weather-detail-value">${ceil(data.list[0].main.feels_like)}&deg;C</div>
+            <div class="current__weather-detail-value">${ceil(first.main.feels_like)}&deg;C</div>
           </div>
           <div class="current__weather-detail">
             <div class="current__weather-detail-label">Влажность</div>
-            <div class="current__weather-detail-value">${data.list[0].main.humidity}%</div>
+            <div class="current__weather-detail-value">${first.main.humidity}%</div>
           </div>
           <div class="current__weather-detail">
             <div class="current__weather-detail-label">Ветер</div>
-            <div class="current__weather-detail-value">${data.list[0].wind.speed}</div>
+            <div class="current__weather-detail-value">${first.wind.speed}</div>
           </div>
           <div class="current__weather-detail">
             <div class="current__weather-detail-label">Давление</div>
-            <div class="current__weather-detail-value">${data.list[0].main.pressure}мб</div>
+            <div class="current__weather-detail-value">${first.main.pressure}мб</div>
           </div>
         </div>
       </section>
-      `
+  `
 }

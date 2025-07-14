@@ -1,7 +1,7 @@
 import { getDaysWeatherElement } from '../components/ui/daysWeatherForecast'
 import type { IResponse } from '../types/response'
+import { appRenderContainer } from '../main'
 export const renderDaysWeather = (data: IResponse) => {
-  const appRenderContainer: HTMLElement | null = document.querySelector('[data-app-render-container]')
   if (!appRenderContainer) {
     return
   }
