@@ -35,3 +35,6 @@ if (!form) {
 form.addEventListener('submit', search)
 
 appRenderContainer?.addEventListener('click', showWeatherForDay)
+
+import { loadFromLocalstorage } from './modules/loadFromLocalstorage'
+loadFromLocalstorage()
