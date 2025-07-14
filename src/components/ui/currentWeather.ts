@@ -1,5 +1,5 @@
 import type { IResponse } from '../../types/response'
-import { ceil } from '../../types/mathCeil'
+import { ceil } from '../../modules/mathCeil'
 import { formatUnixTimeToHHMM } from '../../modules/formatUnixTime'
 
 export const getCurrentWeatherElement = (data: IResponse): string => {
@@ -51,7 +51,7 @@ export const getCurrentWeatherElement = (data: IResponse): string => {
             : ''
         }
         <div class="current__weather-description">
-          Вероятность дождя: ${data.list[0].pop}%
+          Вероятность дождя: ${ceil(data.list[0].pop * 100)}%
         </div>
 
         <div class="current__weather-details">

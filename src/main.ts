@@ -26,5 +26,9 @@ import { renderCurrentWeather } from './render/renderCurrentWeather'
 const data = await weatherApi.getData()
 renderCurrentWeather(data)
 
+import { renderHoursWeather } from './render/renderHoursWeather'
+renderHoursWeather(data)
+
 import { renderTimeOfDayIcon } from './modules/renderTimeOfDayIcon'
 renderTimeOfDayIcon(data)
+
