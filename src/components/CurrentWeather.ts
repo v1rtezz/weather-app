@@ -1,17 +1,14 @@
-import type { IResponse } from '../../types/response'
-import { ceil } from '../../modules/mathCeil'
-import { formatUnixTimeToHHMM } from '../../modules/formatUnixTime'
+import { Component } from './ui/Component'
 
-export const getCurrentWeatherElement = (
-  forecasts: IResponse['list'],
-  city: IResponse['city'],
-): string => {
-  const first = forecasts[0]
+export class CurrentWeather extends Component {
+  constructor() {
+    super('section', 'current')
+  }
 
-  return `
-   <section class="current">
+  private createElement(): void {
+    this.element.innerHTML = ` 
         <div class="current__heading">
-          <div class="current__city">${city.name}</div>
+          <div class="current__city">Киев</div>
           <button class="current__btn">
             <svg
               viewBox="0 0 24 24"
@@ -34,51 +31,50 @@ export const getCurrentWeatherElement = (
           </button>
         </div>
         <div class="current__temp">
-          <div class="current__temp-value">${ceil(first.main.temp_max)}&deg;C</div>
+          <div class="current__temp-value">12&deg;C</div>
           <div class="current__temp-icon">
-            <img src="https://openweathermap.org/img/wn/${first.weather[0].icon}@2x.png" alt="" />
+
           </div>
         </div>
         <div class="current__weather-description">
-          <p>${first.weather[0].description.charAt(0).toUpperCase() + first.weather[0].description.slice(1)}</p>
+          <p>ааыа</p>
         </div>
         <div class="current__weather-description">
-          <p>Восход: ${formatUnixTimeToHHMM(city.sunrise)}</p>
+          <p>Восход: 123</p>
         </div>
         <div class="current__weather-description">
-          <p>Закат: ${formatUnixTimeToHHMM(city.sunset)}</p>
+          <p>Закат: 231</p>
         </div>
 
-        ${
-          first.main.temp >= 40
-            ? `<div class="current__weather-description">
-                <p>Экстремальная жара - смотри не поджарь очко!</p>
-              </div>`
-            : ''
-        }
+       
 
         <div class="current__weather-description">
-          Вероятность дождя: ${ceil(first.pop * 100)}%
+          Вероятность дождя: %
         </div>
 
         <div class="current__weather-details">
           <div class="current__weather-detail">
             <div class="current__weather-detail-label">Ощущается</div>
-            <div class="current__weather-detail-value">${ceil(first.main.feels_like)}&deg;C</div>
+            <div class="current__weather-detail-value">&deg;C</div>
           </div>
           <div class="current__weather-detail">
             <div class="current__weather-detail-label">Влажность</div>
-            <div class="current__weather-detail-value">${first.main.humidity}%</div>
+            <div class="current__weather-detail-value">%</div>
           </div>
           <div class="current__weather-detail">
             <div class="current__weather-detail-label">Ветер</div>
-            <div class="current__weather-detail-value">${first.wind.speed}</div>
+            <div class="current__weather-detail-value"></div>
           </div>
           <div class="current__weather-detail">
             <div class="current__weather-detail-label">Давление</div>
-            <div class="current__weather-detail-value">${first.main.pressure}мб</div>
+            <div class="current__weather-detail-value">мб</div>
           </div>
         </div>
-      </section>
-  `
+`
+  }
+
+  public render(): HTMLElement {
+    this.createElement()
+    return this.element
+  }
 }

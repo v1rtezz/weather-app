@@ -1,4 +1,4 @@
-export class Modal {
+class Modal {
   private modal: HTMLElement
   private modalClassActive: string
   private openBtn: HTMLElement
@@ -17,6 +17,24 @@ export class Modal {
     const modal = document.querySelector(modalSelector)
     const openBtn = document.querySelector(openBtnSelector)
     const closeBtn = document.querySelector(closeBtnSelector)
+
+    if (!modal) {
+      throw new Error(
+        `Modal: не найден элемент по селектору "${modalSelector}"`,
+      )
+    }
+
+    if (!openBtn) {
+      throw new Error(
+        `Modal: не найден элемент по селектору "${openBtnSelector}"`,
+      )
+    }
+
+    if (!closeBtn) {
+      throw new Error(
+        `Modal: не найден элемент по селектору "${closeBtnSelector}"`,
+      )
+    }
 
     if (!modal || !openBtn || !closeBtn) {
       throw new Error('Modal: один из селекторов не нашёл элемент в DOM')
@@ -41,4 +59,14 @@ export class Modal {
     this.modal.classList.toggle(this.modalClassActive)
     this.body.classList.toggle(this.noScroll)
   }
+}
+
+export const createSettingsModal = (): Modal => {
+  return new Modal(
+    '[data-settings-modal]',
+    '[data-open-settings-modal]',
+    '[data-close-settings-modal]',
+    'settings-window--active',
+    'no-scroll',
+  )
 }
