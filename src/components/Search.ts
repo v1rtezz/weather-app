@@ -1,8 +1,11 @@
-import { Component } from "./ui/Component";
+import { Component } from './ui/Component'
+import { WeatherApi } from '../api/weather'
+import type { IWeatherResponse } from '../types/response'
+import { ApiError } from '../api/error'
 
 export class Search extends Component {
-  constructor() {
-    super("section", "search");
+  constructor(private onSearch: (data: IWeatherResponse) => void) {
+    super('section', 'search')
   }
 
   private createElement(): void {
@@ -51,12 +54,40 @@ export class Search extends Component {
           </button>
         </form>
         <p class="form-message" data-form-message></p>`
+    const form = this.element.querySelector(
+      '[data-search-form]',
+    ) as HTMLFormElement
+    form.addEventListener('submit', this.handleSubmit.bind(this))
   }
 
-   
+  private async handleSubmit(event: Event): Promise<void> {
+    event.preventDefault()
+    const inputElement = this.element.querySelector(
+      '[data-search-input]',
+    ) as HTMLInputElement
+    const messageElement = this.element.querySelector(
+      '[data-form-message]',
+    ) as HTMLElement
+
+    if (inputElement.value.trim().length === 0) {
+      messageElement.textContent = 'Проверка на дурака прошла успешно'
+      return
+    }
+
+    try {
+      const data = await WeatherApi.get(inputElement.value.trim())
+      console.log(data)
+      this.onSearch(data)
+      localStorage.setItem('currentCity', inputElement.value.trim())
+    } catch (error) {
+      if (error instanceof ApiError) {
+          messageElement.textContent = "Сорян, не смог найти твой город :( вот текст ошибки если шаришь: " + error.message
+      }
+    }
+  }
 
   public render(): HTMLElement {
-    this.createElement();
-    return this.element;
+    this.createElement()
+    return this.element
   }
 }

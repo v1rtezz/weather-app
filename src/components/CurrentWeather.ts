@@ -8,8 +8,6 @@ export class CurrentWeather extends Component {
   }
 
   private async createElement(): Promise<void> {
-    console.log(this.data)
-
     if (!this.data) {
       this.element.innerHTML = '<p>Ошибка загрузки данных</p>'
       return

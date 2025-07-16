@@ -19,8 +19,6 @@ export class Api {
     apiKey?: string,
   ): Promise<ResponseData> {
     const url = this.baseUrl + endpoint + (apiKey ? `&appid=${apiKey}` : '')
-    console.log(url);
-    
     const headers = {
       ...this.defaultHeaders,
       ...(options.headers || {}),
