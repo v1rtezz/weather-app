@@ -1,10 +1,10 @@
-import { Component } from './ui/Component'
-import type { IWeatherResponse } from '../types/response'
-import { formatUnixTimeToHHMM } from '../utils/formatUnixTime'
+import { Component } from './Component'
+import type { IWeatherResponse } from '../../types/response'
+import { formatUnixTimeToHHMM } from '../../utils/formatUnixTime'
 
 export class CurrentWeather extends Component {
   constructor(public data: IWeatherResponse | null = null) {
-    super('section', 'current')
+    super('section', 'current', 'data-current-weather')
   }
 
   private async createElement(): Promise<void> {

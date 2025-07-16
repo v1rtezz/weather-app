@@ -1,10 +1,10 @@
 import { Page } from '../components/ui/Page'
 import { Search } from '../components/Search'
-import { CurrentWeather } from '../components/CurrentWeather'
+import { CurrentWeather } from '../components/ui/currentWeather'
 import type { IWeatherResponse } from '../types/response'
 import { WeatherApi } from '../api/weather'
 import { ApiError } from '../api/error'
-
+import { CurrentHoursWeather } from '../components/HoursWeather'
 
 export class HomePage extends Page {
   protected data: IWeatherResponse | null = null
@@ -35,14 +35,21 @@ export class HomePage extends Page {
       return
     }
     this.appendCurrentWeather(container)
+    this.appendCurrentHoursWeather(container)
   }
 
   private updateCurrentWeather(container: HTMLElement): void {
-    const old = container.querySelector('.current')
-    if (old) old.remove()
+    const oldCurrentWeather = container.querySelector('[data-current-weather]')
+    const oldCurrentHoursWeather = container.querySelector(
+      '[data-current-hours-weather]',
+    )
+
+    if (oldCurrentWeather) oldCurrentWeather.remove()
+    if (oldCurrentHoursWeather) oldCurrentHoursWeather.remove()
 
     if (this.data) {
-      container.append(new CurrentWeather(this.data).render())
+      this.appendCurrentWeather(container)
+      this.appendCurrentHoursWeather(container)
     }
   }
 
@@ -56,6 +63,12 @@ export class HomePage extends Page {
   }
   private async appendCurrentWeather(container: HTMLElement): Promise<void> {
     container.append(new CurrentWeather(this.data).render())
+  }
+
+  private async appendCurrentHoursWeather(
+    container: HTMLElement,
+  ): Promise<void> {
+    container.append(new CurrentHoursWeather(this.data).render())
   }
 
   public async render(): Promise<HTMLElement> {

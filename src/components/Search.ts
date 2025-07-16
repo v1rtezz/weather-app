@@ -76,7 +76,6 @@ export class Search extends Component {
 
     try {
       const data = await WeatherApi.get(inputElement.value.trim())
-      console.log(data)
       this.onSearch(data)
       localStorage.setItem('currentCity', inputElement.value.trim())
     } catch (error) {
