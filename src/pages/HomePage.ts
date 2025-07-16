@@ -12,13 +12,15 @@ export class HomePage extends Page {
     super('main')
   }
   private async getDataFromLocalstorage(): Promise<void> {
-    try {
-      const city = localStorage.getItem('currentCity')
-      if (!city) return
+    const city = localStorage.getItem('currentCity')
+    if (!city) return
+    await this.fetchData(city)
+  }
 
+  private async fetchData(city: string): Promise<void> {
+    try {
       const data = await WeatherApi.get(city)
       if (!data) return
-
       this.data = data
     } catch (error) {
       if (error instanceof ApiError) {

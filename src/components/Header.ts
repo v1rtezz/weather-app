@@ -39,7 +39,7 @@ export class Header extends Component {
           </button>
           <img
             class="logo"
-            src="./assets/icons/logo.png"
+            src="/logo.png"
             alt=""
             width="100"
             height="100"

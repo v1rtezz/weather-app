@@ -69,15 +69,16 @@ export class Search extends Component {
       '[data-form-message]',
     ) as HTMLElement
 
-    if (inputElement.value.trim().length === 0) {
+    const inputValue = inputElement.value.trim()
+    if (inputValue.length === 0) {
       messageElement.textContent = 'Проверка на дурака прошла успешно'
       return
     }
 
     try {
-      const data = await WeatherApi.get(inputElement.value.trim())
+      const data = await WeatherApi.get(inputValue)
       this.onSearch(data)
-      localStorage.setItem('currentCity', inputElement.value.trim())
+      localStorage.setItem('currentCity', inputValue)
     } catch (error) {
       if (error instanceof ApiError) {
           messageElement.textContent = "Сорян, не смог найти твой город :( вот текст ошибки если шаришь: " + error.message
