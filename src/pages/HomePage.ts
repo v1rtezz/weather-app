@@ -1,6 +1,6 @@
 import { Page } from '../components/ui/Page'
 import { Search } from '../components/Search'
-import { CurrentWeather } from '../components/ui/currentWeather'
+import { CurrentWeather } from '../components/ui/CurrentWeather'
 import type { IWeatherResponse } from '../types/response'
 import { WeatherApi } from '../api/weather'
 import { ApiError } from '../api/error'
