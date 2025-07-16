@@ -1,4 +1,4 @@
-(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const t of document.querySelectorAll('link[rel="modulepreload"]'))c(t);new MutationObserver(t=>{for(const r of t)if(r.type==="childList")for(const i of r.addedNodes)i.tagName==="LINK"&&i.rel==="modulepreload"&&c(i)}).observe(document,{childList:!0,subtree:!0});function s(t){const r={};return t.integrity&&(r.integrity=t.integrity),t.referrerPolicy&&(r.referrerPolicy=t.referrerPolicy),t.crossOrigin==="use-credentials"?r.credentials="include":t.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function c(t){if(t.ep)return;t.ep=!0;const r=s(t);fetch(t.href,r)}})();class d{modal;modalClassActive;openBtn;closeBtn;noScroll;body=document.body;constructor(e,s,c,t,r){this.modalClassActive=t,this.noScroll=r;const i=document.querySelector(e),o=document.querySelector(s),l=document.querySelector(c);if(!i)throw new Error(`Modal: не найден элемент по селектору "${e}"`);if(!o)throw new Error(`Modal: не найден элемент по селектору "${s}"`);if(!l)throw new Error(`Modal: не найден элемент по селектору "${c}"`);if(!i||!o||!l)throw new Error("Modal: один из селекторов не нашёл элемент в DOM");this.modal=i,this.openBtn=o,this.closeBtn=l}init(){this.openBtn.addEventListener("click",()=>this.toggle()),this.closeBtn.addEventListener("click",()=>this.toggle()),this.body.addEventListener("keydown",e=>{e.code==="Escape"&&this.toggle()})}toggle(){this.modal.classList.toggle(this.modalClassActive),this.body.classList.toggle(this.noScroll)}}const h=()=>new d("[data-settings-modal]","[data-open-settings-modal]","[data-close-settings-modal]","settings-window--active","no-scroll");class a{element;constructor(e,s){this.element=document.createElement(e),this.element.className=s}}class p extends a{constructor(){super("header","header")}createElement(){this.element.innerHTML=` <button class="open-settings" data-open-settings-modal>
+var m=Object.defineProperty;var g=(r,t,e)=>t in r?m(r,t,{enumerable:!0,configurable:!0,writable:!0,value:e}):r[t]=e;var n=(r,t,e)=>g(r,typeof t!="symbol"?t+"":t,e);(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const s of document.querySelectorAll('link[rel="modulepreload"]'))i(s);new MutationObserver(s=>{for(const a of s)if(a.type==="childList")for(const c of a.addedNodes)c.tagName==="LINK"&&c.rel==="modulepreload"&&i(c)}).observe(document,{childList:!0,subtree:!0});function e(s){const a={};return s.integrity&&(a.integrity=s.integrity),s.referrerPolicy&&(a.referrerPolicy=s.referrerPolicy),s.crossOrigin==="use-credentials"?a.credentials="include":s.crossOrigin==="anonymous"?a.credentials="omit":a.credentials="same-origin",a}function i(s){if(s.ep)return;s.ep=!0;const a=e(s);fetch(s.href,a)}})();class w{constructor(t,e,i,s,a){n(this,"modal");n(this,"modalClassActive");n(this,"openBtn");n(this,"closeBtn");n(this,"noScroll");n(this,"body",document.body);this.modalClassActive=s,this.noScroll=a;const c=document.querySelector(t),o=document.querySelector(e),d=document.querySelector(i);if(!c)throw new Error(`Modal: не найден элемент по селектору "${t}"`);if(!o)throw new Error(`Modal: не найден элемент по селектору "${e}"`);if(!d)throw new Error(`Modal: не найден элемент по селектору "${i}"`);if(!c||!o||!d)throw new Error("Modal: один из селекторов не нашёл элемент в DOM");this.modal=c,this.openBtn=o,this.closeBtn=d}init(){this.openBtn.addEventListener("click",()=>this.toggle()),this.closeBtn.addEventListener("click",()=>this.toggle()),this.body.addEventListener("keydown",t=>{t.code==="Escape"&&this.toggle()})}toggle(){this.modal.classList.toggle(this.modalClassActive),this.body.classList.toggle(this.noScroll)}}const v=()=>new w("[data-settings-modal]","[data-open-settings-modal]","[data-close-settings-modal]","settings-window--active","no-scroll");class l{constructor(t,e){n(this,"element");this.element=document.createElement(t),this.element.className=e}}class f extends l{constructor(){super("header","header")}createElement(){this.element.innerHTML=` <button class="open-settings" data-open-settings-modal>
             <svg
               version="1.1"
               id="_x32_"
@@ -40,7 +40,7 @@
           <h1 class="header__title">
             Забудь о неожиданном&nbsp;дожде с&nbsp;Weather App!
           </h1>
-          `}render(){return this.createElement(),this.element}}class u extends a{constructor(e,s){super(e,s)}render(){return this.element}}class g{element;constructor(e){this.element=document.createElement("main"),this.element.className=e;const s=new u("div","container").render();this.element.append(s)}}class m extends a{constructor(){super("section","search")}createElement(){this.element.innerHTML=` <form class="search__form" data-search-form>
+          `}render(){return this.createElement(),this.element}}class _ extends l{constructor(t,e){super(t,e)}render(){return this.element}}class y{constructor(t){n(this,"element");this.element=document.createElement("main"),this.element.className=t;const e=new _("div","container").render();this.element.append(e)}}class C extends l{constructor(){super("section","search")}createElement(){this.element.innerHTML=` <form class="search__form" data-search-form>
           <label class="hidden" for="search-input">Выберите город</label>
           <input
             name="search-input"
@@ -84,9 +84,9 @@
             </svg>
           </button>
         </form>
-        <p class="form-message" data-form-message></p>`}render(){return this.createElement(),this.element}}class v extends a{constructor(){super("section","current")}createElement(){this.element.innerHTML=` 
+        <p class="form-message" data-form-message></p>`}render(){return this.createElement(),this.element}}function h(r){const t=new Date(r*1e3),e=t.getHours().toString().padStart(2,"0"),i=t.getMinutes().toString().padStart(2,"0");return`${e}:${i}`}class b extends l{constructor(t=null){super("section","current"),this.data=t}async createElement(){if(console.log(this.data),!this.data){this.element.innerHTML="<p>Ошибка загрузки данных</p>";return}this.element.innerHTML=`
         <div class="current__heading">
-          <div class="current__city">Киев</div>
+          <div class="current__city">${this.data.city.name}</div>
           <button class="current__btn">
             <svg
               viewBox="0 0 24 24"
@@ -109,43 +109,42 @@
           </button>
         </div>
         <div class="current__temp">
-          <div class="current__temp-value">12&deg;C</div>
+          <div class="current__temp-value">${Math.ceil(this.data.list[0].main.temp_max)}&deg;C</div>
           <div class="current__temp-icon">
-
+            <img src="./src/assets/icons/sunny.svg" alt="" width="50px" />
           </div>
         </div>
         <div class="current__weather-description">
-          <p>ааыа</p>
+          <p>${this.data.list[0].weather[0].description.charAt(0).toUpperCase()+this.data.list[0].weather[0].description.slice(1)}</p>
         </div>
         <div class="current__weather-description">
-          <p>Восход: 123</p>
+          Вероятность дождя: ${Math.ceil(this.data.list[0].pop*100)}%
+                  </div>
+           <div class="current__weather-description">
+          <p>Восход: ${h(this.data.city.sunrise)}</p>
         </div>
-        <div class="current__weather-description">
-          <p>Закат: 231</p>
+         <div class="current__weather-description">
+          <p>Закат: ${h(this.data.city.sunset)}</p>
         </div>
-
-       
-
-        <div class="current__weather-description">
-          Вероятность дождя: %
-        </div>
-
+         ${this.data.list[0].main.temp>=40?`<div class="current__weather-description">
+          <p>Экстремальная жара - смотри не поджарь очко!</p>
+        </div>`:""}
         <div class="current__weather-details">
           <div class="current__weather-detail">
             <div class="current__weather-detail-label">Ощущается</div>
-            <div class="current__weather-detail-value">&deg;C</div>
+            <div class="current__weather-detail-value">${Math.ceil(this.data.list[0].main.feels_like)}&deg;C</div>
           </div>
           <div class="current__weather-detail">
             <div class="current__weather-detail-label">Влажность</div>
-            <div class="current__weather-detail-value">%</div>
+            <div class="current__weather-detail-value">${this.data.list[0].main.humidity}%</div>
           </div>
           <div class="current__weather-detail">
             <div class="current__weather-detail-label">Ветер</div>
-            <div class="current__weather-detail-value"></div>
+            <div class="current__weather-detail-value">${this.data.list[0].wind.speed}</div>
           </div>
           <div class="current__weather-detail">
             <div class="current__weather-detail-label">Давление</div>
-            <div class="current__weather-detail-value">мб</div>
+            <div class="current__weather-detail-value">${this.data.list[0].main.pressure}мб</div>
           </div>
         </div>
-`}render(){return this.createElement(),this.element}}class _ extends g{constructor(){super("home")}async createPage(){const e=this.element.querySelector(".container");this.appendSearch(e),this.appendCurrentWeather(e)}appendSearch(e){e.append(new m().render())}appendCurrentWeather(e){e.append(new v().render())}async render(){return await this.createPage(),this.element}}class w{root;constructor(){this.root=document.querySelector("[data-app]")}async init(){this.root.append(new p().render()),this.root.append(await new _().render()),h().init()}}new w().init();
+`}render(){return this.createElement(),this.element}}class u extends Error{constructor(t,e,i,s){super(`Http error ${t}: ${e}`),this.statusCode=t,this.statusText=e,this.responseBody=i,this.response=s}}const p={API_URL:"https://api.openweathermap.org",API_KEY:"11cdf37009d6cf0b79c8c8a1094ec724"};class M{constructor({baseUrl:t,headers:e,apiKey:i}){n(this,"baseUrl");n(this,"defaultHeaders");n(this,"apiKey");this.baseUrl=t,this.defaultHeaders=e||{},this.apiKey=i}async request(t,e={},i){const s=this.baseUrl+t+(i?`&appid=${i}`:"");console.log(s);const a={...this.defaultHeaders,...e.headers||{}},c=await fetch(s,{...e,headers:a}),o=await c.json();if(!c.ok)throw new u(c.status,c.statusText,o,c);return o}get(t,e={}){return this.request(t,{...e,method:"GET"},this.apiKey)}}const x=new M({baseUrl:p.API_URL,apiKey:p.API_KEY});class L{static async get(){return await x.get("/data/2.5/forecast?q=London&units=metric&lang=ru")}}class S extends y{constructor(){super("home");n(this,"data",null)}async getData(){try{const e=await L.get();console.log(e),this.data=e}catch(e){e instanceof u&&console.error(e.message)}}async createPage(){const e=this.element.querySelector(".container");if(this.appendSearch(e),await this.getData(),!this.data){this.element.innerHTML="<p>Ошибка загрузки </p>";return}this.appendCurrentWeather(e)}appendSearch(e){e.append(new C().render())}async appendCurrentWeather(e){e.append(new b(this.data).render())}async render(){return await this.createPage(),this.element}}class E{constructor(){n(this,"root");this.root=document.querySelector("[data-app]")}async init(){this.root.append(new f().render()),this.root.append(await new S().render()),v().init()}}new E().init();
