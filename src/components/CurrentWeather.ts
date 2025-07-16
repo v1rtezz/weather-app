@@ -1,14 +1,23 @@
 import { Component } from './ui/Component'
+import type { IWeatherResponse } from '../types/response'
+import { formatUnixTimeToHHMM } from '../utils/formatUnixTime'
 
 export class CurrentWeather extends Component {
-  constructor() {
+  constructor(public data: IWeatherResponse | null = null) {
     super('section', 'current')
   }
 
-  private createElement(): void {
-    this.element.innerHTML = ` 
+  private async createElement(): Promise<void> {
+    console.log(this.data)
+
+    if (!this.data) {
+      this.element.innerHTML = '<p>Ошибка загрузки данных</p>'
+      return
+    }
+
+    this.element.innerHTML = `
         <div class="current__heading">
-          <div class="current__city">Киев</div>
+          <div class="current__city">${this.data.city.name}</div>
           <button class="current__btn">
             <svg
               viewBox="0 0 24 24"
@@ -31,43 +40,46 @@ export class CurrentWeather extends Component {
           </button>
         </div>
         <div class="current__temp">
-          <div class="current__temp-value">12&deg;C</div>
+          <div class="current__temp-value">${Math.ceil(this.data.list[0].main.temp_max)}&deg;C</div>
           <div class="current__temp-icon">
-
+            <img src="./src/assets/icons/sunny.svg" alt="" width="50px" />
           </div>
         </div>
         <div class="current__weather-description">
-          <p>ааыа</p>
+          <p>${this.data.list[0].weather[0].description.charAt(0).toUpperCase() + this.data.list[0].weather[0].description.slice(1)}</p>
         </div>
         <div class="current__weather-description">
-          <p>Восход: 123</p>
+          Вероятность дождя: ${Math.ceil(this.data.list[0].pop * 100)}%
+                  </div>
+           <div class="current__weather-description">
+          <p>Восход: ${formatUnixTimeToHHMM(this.data.city.sunrise)}</p>
         </div>
-        <div class="current__weather-description">
-          <p>Закат: 231</p>
+         <div class="current__weather-description">
+          <p>Закат: ${formatUnixTimeToHHMM(this.data.city.sunset)}</p>
         </div>
-
-       
-
-        <div class="current__weather-description">
-          Вероятность дождя: %
-        </div>
-
+         ${
+           this.data.list[0].main.temp >= 40
+             ? `<div class="current__weather-description">
+          <p>Экстремальная жара - смотри не поджарь очко!</p>
+        </div>`
+             : ''
+         }
         <div class="current__weather-details">
           <div class="current__weather-detail">
             <div class="current__weather-detail-label">Ощущается</div>
-            <div class="current__weather-detail-value">&deg;C</div>
+            <div class="current__weather-detail-value">${Math.ceil(this.data.list[0].main.feels_like)}&deg;C</div>
           </div>
           <div class="current__weather-detail">
             <div class="current__weather-detail-label">Влажность</div>
-            <div class="current__weather-detail-value">%</div>
+            <div class="current__weather-detail-value">${this.data.list[0].main.humidity}%</div>
           </div>
           <div class="current__weather-detail">
             <div class="current__weather-detail-label">Ветер</div>
-            <div class="current__weather-detail-value"></div>
+            <div class="current__weather-detail-value">${this.data.list[0].wind.speed}</div>
           </div>
           <div class="current__weather-detail">
             <div class="current__weather-detail-label">Давление</div>
-            <div class="current__weather-detail-value">мб</div>
+            <div class="current__weather-detail-value">${this.data.list[0].main.pressure}мб</div>
           </div>
         </div>
 `

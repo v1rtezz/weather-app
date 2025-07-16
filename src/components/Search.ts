@@ -53,6 +53,8 @@ export class Search extends Component {
         <p class="form-message" data-form-message></p>`
   }
 
+   
+
   public render(): HTMLElement {
     this.createElement();
     return this.element;

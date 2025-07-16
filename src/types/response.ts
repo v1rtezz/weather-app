@@ -36,6 +36,7 @@ export interface IForecastSnapshot {
     pod: string
   }
   dt_txt: string
+  wind: IWindInfo
 }
 
 export interface IResponceCity {
