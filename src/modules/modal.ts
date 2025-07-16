@@ -1,4 +1,4 @@
-class Modal {
+export class ModalInit {
   private modal: HTMLElement
   private modalClassActive: string
   private openBtn: HTMLElement
@@ -59,14 +59,4 @@ class Modal {
     this.modal.classList.toggle(this.modalClassActive)
     this.body.classList.toggle(this.noScroll)
   }
-}
-
-export const createSettingsModal = (): Modal => {
-  return new Modal(
-    '[data-settings-modal]',
-    '[data-open-settings-modal]',
-    '[data-close-settings-modal]',
-    'settings-window--active',
-    'no-scroll',
-  )
 }

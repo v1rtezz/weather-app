@@ -5,10 +5,11 @@ import type { IWeatherResponse } from '../types/response'
 import { WeatherApi } from '../api/weather'
 import { ApiError } from '../api/error'
 
+
 export class HomePage extends Page {
   protected data: IWeatherResponse | null = null
   constructor() {
-    super('home')
+    super('main')
   }
   private async getDataFromLocalstorage(): Promise<void> {
     try {
