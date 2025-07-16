@@ -13,6 +13,14 @@ export class CurrentWeather extends Component {
       return
     }
 
+    const rainChanceItem = this.data.list.find(
+      (item) => item.pop && item.pop > 0,
+    )
+
+    const popPercent = rainChanceItem
+      ? `${Math.ceil(rainChanceItem.pop * 100)}%`
+      : 'Нет данных о вероятности дождя'
+
     this.element.innerHTML = `
         <div class="current__heading">
           <div class="current__city">${this.data.city.name}</div>
@@ -47,7 +55,7 @@ export class CurrentWeather extends Component {
           <p>${this.data.list[0].weather[0].description.charAt(0).toUpperCase() + this.data.list[0].weather[0].description.slice(1)}</p>
         </div>
         <div class="current__weather-description">
-          Вероятность дождя: ${Math.ceil(this.data.list[0].pop * 100)}%
+          Вероятность дождя: ${popPercent}
                   </div>
            <div class="current__weather-description">
           <p>Восход: ${formatUnixTimeToHHMM(this.data.city.sunrise)}</p>
