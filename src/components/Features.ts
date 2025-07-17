@@ -1,11 +1,11 @@
 import { Component } from './ui/Component'
 import { FeaturesCard } from './ui/FeaturesCard'
-import { CONFIG } from '../config'
 import { getFavorites } from '../utils/features'
 
 export class Features extends Component {
   public featuresList: string[] = getFavorites()
-  constructor(private onDayClick?: (dt: number) => void) {
+
+  constructor(private onCityClick?: (city: string) => void) {
     super('section', 'features', 'data-features')
     this.featuresList = getFavorites()
     this.createElement()
@@ -24,7 +24,7 @@ export class Features extends Component {
       const card = new FeaturesCard(city)
       const cardEl = card.render()
       cardEl.addEventListener('click', () => {
-        console.log(`Выбран город: ${city}`)
+        this.onCityClick?.(city) 
       })
       cardsWrapper.append(cardEl)
     })
@@ -35,3 +35,4 @@ export class Features extends Component {
     return this.element
   }
 }
+

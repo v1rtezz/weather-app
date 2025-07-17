@@ -103,8 +103,14 @@ export class HomePage extends Page {
   }
 
   private appendFeatures(container: HTMLElement): void {
-    container.append(new Features().render())
+    const features = new Features(async (city: string) => {
+      localStorage.setItem(this.CITY_KEY, city)
+      await this.fetchData(city)
+      this.renderFullWeather(container)
+    })
+    container.append(features.render())
   }
+
   private appendTimeIndicator(container: HTMLElement): void {
     container.append(new TimeIndicator(this.data).render())
   }

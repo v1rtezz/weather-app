@@ -4,7 +4,7 @@ import type { IWeatherResponse } from '../../types/response'
 
 export class FeaturesCard extends Component {
   constructor(private city: string) {
-    super('div', 'features__card')
+    super('button', 'features__card')
   }
 
   private async createElement(): Promise<void> {
