@@ -5,9 +5,11 @@ import type { IWeatherResponse } from '../types/response'
 import { WeatherApi } from '../api/weather'
 import { ApiError } from '../api/error'
 import { CurrentHoursWeather } from '../components/HoursWeather'
+import { CurrentDaysWeather } from '../components/DaysWeather'
 
 export class HomePage extends Page {
   protected data: IWeatherResponse | null = null
+  private selectedDt: number | null = null
   constructor() {
     super('main')
   }
@@ -36,8 +38,8 @@ export class HomePage extends Page {
     if (!this.data) {
       return
     }
-    this.appendCurrentWeather(container)
-    this.appendCurrentHoursWeather(container)
+
+    this.renderFullWeather(container)
   }
 
   private updateCurrentWeather(container: HTMLElement): void {
@@ -45,24 +47,51 @@ export class HomePage extends Page {
     const oldCurrentHoursWeather = container.querySelector(
       '[data-current-hours-weather]',
     )
+    const oldCurrentDaysWeather = container.querySelector(
+      '[data-current-days-weather]',
+    )
 
     if (oldCurrentWeather) oldCurrentWeather.remove()
     if (oldCurrentHoursWeather) oldCurrentHoursWeather.remove()
+    if (oldCurrentDaysWeather) oldCurrentDaysWeather.remove()
 
     if (this.data) {
-      this.appendCurrentWeather(container)
-      this.appendCurrentHoursWeather(container)
+      this.renderFullWeather(container)
     }
   }
 
   private appendSearch(container: HTMLElement): void {
-    const search = new Search((data) => {
-      this.data = data
-      this.updateCurrentWeather(container)
-    })
+    const search = new Search(
+      (data) => {
+        this.data = data
+        this.updateCurrentWeather(container)
+      },
+      () => this.clearWeather(container),
+    )
 
     container.append(search.render())
   }
+
+  private renderFullWeather(container: HTMLElement): void {
+    this.clearWeather(container)
+    this.appendCurrentWeather(container)
+    this.appendCurrentHoursWeather(container)
+    this.appendCurrentDaysWeather(container)
+  }
+  private clearWeather(container: HTMLElement): void {
+    const oldCurrentWeather = container.querySelector('[data-current-weather]')
+    const oldCurrentHoursWeather = container.querySelector(
+      '[data-current-hours-weather]',
+    )
+    const oldCurrentDaysWeather = container.querySelector(
+      '[data-current-days-weather]',
+    )
+
+    if (oldCurrentWeather) oldCurrentWeather.remove()
+    if (oldCurrentHoursWeather) oldCurrentHoursWeather.remove()
+    if (oldCurrentDaysWeather) oldCurrentDaysWeather.remove()
+  }
+
   private async appendCurrentWeather(container: HTMLElement): Promise<void> {
     container.append(new CurrentWeather(this.data).render())
   }
@@ -71,6 +100,55 @@ export class HomePage extends Page {
     container: HTMLElement,
   ): Promise<void> {
     container.append(new CurrentHoursWeather(this.data).render())
+  }
+
+  private async appendCurrentDaysWeather(
+    container: HTMLElement,
+  ): Promise<void> {
+    container.append(
+      this.selectedDt !== null
+        ? new CurrentDaysWeather(
+            this.data,
+            (dt) => {
+              this.selectedDt = dt
+              this.updateCurrentWeatherForDay(container, dt)
+            },
+            this.selectedDt,
+          ).render()
+        : new CurrentDaysWeather(this.data, (dt) => {
+            this.selectedDt = dt
+            this.updateCurrentWeatherForDay(container, dt)
+          }).render(),
+    )
+  }
+
+  private updateCurrentWeatherForDay(container: HTMLElement, dt: number): void {
+    if (!this.data) return
+    const selectedDate = new Date(dt * 1000)
+    const filteredList = this.data.list.filter((item) => {
+      const itemDate = new Date(item.dt * 1000)
+      return (
+        itemDate.getFullYear() === selectedDate.getFullYear() &&
+        itemDate.getMonth() === selectedDate.getMonth() &&
+        itemDate.getDate() === selectedDate.getDate()
+      )
+    })
+    if (filteredList.length === 0) return
+    this.selectedDt = dt
+    this.clearWeather(container)
+    container.append(
+      new CurrentWeather({ ...this.data, list: filteredList }).render(),
+    )
+    container.append(
+      new CurrentHoursWeather({ ...this.data, list: filteredList }).render(),
+    )
+    container.append(
+      new CurrentDaysWeather(
+        this.data,
+        (d) => this.updateCurrentWeatherForDay(container, d),
+        this.selectedDt,
+      ).render(),
+    )
   }
 
   public async render(): Promise<HTMLElement> {

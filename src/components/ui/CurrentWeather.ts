@@ -19,7 +19,7 @@ export class CurrentWeather extends Component {
 
     const popPercent = rainChanceItem
       ? `${Math.ceil(rainChanceItem.pop * 100)}%`
-      : 'Нет данных о вероятности дождя'
+      : 'Нет данных'
 
     this.element.innerHTML = `
         <div class="current__heading">

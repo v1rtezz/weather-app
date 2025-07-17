@@ -4,7 +4,10 @@ import type { IWeatherResponse } from '../types/response'
 import { ApiError } from '../api/error'
 
 export class Search extends Component {
-  constructor(private onSearch: (data: IWeatherResponse) => void) {
+  constructor(
+    private onSearch: (data: IWeatherResponse) => void,
+    private onError: () => void,
+  ) {
     super('section', 'search')
   }
 
@@ -69,9 +72,12 @@ export class Search extends Component {
       '[data-form-message]',
     ) as HTMLElement
 
+    messageElement.innerHTML = ''
     const inputValue = inputElement.value.trim()
     if (inputValue.length === 0) {
       messageElement.textContent = 'Проверка на дурака прошла успешно'
+      this.onError()
+
       return
     }
 
@@ -81,7 +87,10 @@ export class Search extends Component {
       localStorage.setItem('currentCity', inputValue)
     } catch (error) {
       if (error instanceof ApiError) {
-          messageElement.textContent = "Сорян, не смог найти твой город :( вот текст ошибки если шаришь: " + error.message
+        this.onError()
+        messageElement.textContent =
+          'Окак, видать твоего города у нас нет, сорян. Текст ошибки:' +
+          error.message
       }
     }
   }
