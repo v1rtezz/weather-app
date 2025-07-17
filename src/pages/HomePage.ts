@@ -6,15 +6,18 @@ import { WeatherApi } from '../api/weather'
 import { ApiError } from '../api/error'
 import { CurrentHoursWeather } from '../components/HoursWeather'
 import { CurrentDaysWeather } from '../components/DaysWeather'
+import { Features } from '../components/Features'
 
 export class HomePage extends Page {
+  private CITY_KEY = 'currentCity'
+
   protected data: IWeatherResponse | null = null
   private selectedDt: number | null = null
   constructor() {
     super('main')
   }
   private async getDataFromLocalstorage(): Promise<void> {
-    const city = localStorage.getItem('currentCity')
+    const city = localStorage.getItem(this.CITY_KEY)
     if (!city) return
     await this.fetchData(city)
   }
@@ -77,6 +80,7 @@ export class HomePage extends Page {
     this.appendCurrentWeather(container)
     this.appendCurrentHoursWeather(container)
     this.appendCurrentDaysWeather(container)
+    this.appendFeatures(container)
   }
   private clearWeather(container: HTMLElement): void {
     const oldCurrentWeather = container.querySelector('[data-current-weather]')
@@ -86,10 +90,12 @@ export class HomePage extends Page {
     const oldCurrentDaysWeather = container.querySelector(
       '[data-current-days-weather]',
     )
+    const oldFeatures = container.querySelector('[data-features]')
 
     if (oldCurrentWeather) oldCurrentWeather.remove()
     if (oldCurrentHoursWeather) oldCurrentHoursWeather.remove()
     if (oldCurrentDaysWeather) oldCurrentDaysWeather.remove()
+    if (oldFeatures) oldFeatures.remove()
   }
 
   private async appendCurrentWeather(container: HTMLElement): Promise<void> {
@@ -100,6 +106,10 @@ export class HomePage extends Page {
     container: HTMLElement,
   ): Promise<void> {
     container.append(new CurrentHoursWeather(this.data).render())
+  }
+
+  private appendFeatures(container: HTMLElement): void {
+    container.append(new Features().render())
   }
 
   private async appendCurrentDaysWeather(

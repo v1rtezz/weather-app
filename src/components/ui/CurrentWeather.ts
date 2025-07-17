@@ -1,6 +1,8 @@
 import { Component } from './Component'
 import type { IWeatherResponse } from '../../types/response'
 import { formatUnixTimeToHHMM } from '../../utils/formatUnixTime'
+import { addFavorite, getFavorites, removeFavorite } from '../../utils/features'
+import { Features } from '../Features'
 
 export class CurrentWeather extends Component {
   constructor(public data: IWeatherResponse | null = null) {
@@ -24,7 +26,7 @@ export class CurrentWeather extends Component {
     this.element.innerHTML = `
         <div class="current__heading">
           <div class="current__city">${this.data.city.name}</div>
-          <button class="current__btn">
+          <button class="current__btn"> 
             <svg
               viewBox="0 0 24 24"
               fill="#fff"
@@ -48,7 +50,7 @@ export class CurrentWeather extends Component {
         <div class="current__temp">
           <div class="current__temp-value">${Math.ceil(this.data.list[0].main.temp_max)}&deg;C</div>
           <div class="current__temp-icon">
-            <img src="./src/assets/icons/sunny.svg" alt="" width="50px" />
+      <img src="https://openweathermap.org/img/wn/${this.data.list[0].weather[0].icon}@2x.png" alt="" />         
           </div>
         </div>
         <div class="current__weather-description">
@@ -89,6 +91,41 @@ export class CurrentWeather extends Component {
           </div>
         </div>
 `
+
+    const favBtn = this.element.querySelector('.current__btn')
+   if (favBtn) {
+  favBtn.addEventListener('click', () => {
+    if (!this.data) return
+    const city = this.data.city.name
+    const isActive = favBtn.classList.contains('current__btn--active')
+
+    if (isActive) {
+      // Убираем из избранного
+      removeFavorite(city)
+      favBtn.classList.remove('current__btn--active')
+      console.log(`Удалён из избранного: ${city}`)
+    } else {
+      // Добавляем в избранное
+      addFavorite(city)
+      favBtn.classList.add('current__btn--active')
+      console.log(`Добавлен в избранное: ${city}`)
+    }
+
+    // Перерисовываем блок избранного
+    const oldFeatures = document.querySelector('[data-features]')
+    if (oldFeatures) oldFeatures.remove()
+    const newFeatures = new Features().render()
+    document.querySelector('[data-app]')?.append(newFeatures)
+  })
+}
+
+
+    if (favBtn && this.data) {
+      const isFavorite = getFavorites().includes(this.data.city.name)
+      if (isFavorite) {
+        favBtn.classList.add('current__btn--active')
+      }
+    }
   }
 
   public render(): HTMLElement {
