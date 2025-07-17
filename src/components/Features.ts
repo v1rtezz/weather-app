@@ -1,19 +1,18 @@
 import { Component } from './ui/Component'
 import { FeaturesCard } from './ui/FeaturesCard'
-import { CONFIG } from "../config"
+import { CONFIG } from '../config'
 import { getFavorites } from '../utils/features'
 
 export class Features extends Component {
   public featuresList: string[] = getFavorites()
-  constructor() {
+  constructor(private onDayClick?: (dt: number) => void) {
     super('section', 'features', 'data-features')
-    this.featuresList = getFavorites() 
-    this.createElement()               
+    this.featuresList = getFavorites()
+    this.createElement()
   }
 
   private createElement(): void {
-    this.element.innerHTML = 
-    `
+    this.element.innerHTML = `
       <h2 class="features__title title">Избранные города</h2>
       <div class="features__cards" data-features-cards></div>
     `
@@ -31,9 +30,8 @@ export class Features extends Component {
     })
   }
 
-
   public render(): HTMLElement {
-  this.createElement()
-  return this.element
-}
+    this.createElement()
+    return this.element
+  }
 }

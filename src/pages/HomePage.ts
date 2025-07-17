@@ -156,9 +156,7 @@ export class HomePage extends Page {
         this.selectedDt,
       ).render(),
     )
-    this.appendCurrentDaysWeather(container)
     this.appendFeatures(container)
-    this.appendSearch(container)
     this.appendTimeIndicator(container)
   }
 
