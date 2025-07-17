@@ -7,6 +7,7 @@ import { ApiError } from '../api/error'
 import { CurrentHoursWeather } from '../components/HoursWeather'
 import { CurrentDaysWeather } from '../components/DaysWeather'
 import { Features } from '../components/Features'
+import { TimeIndicator } from '../components/ui/TimeIndicator'
 
 export class HomePage extends Page {
   private CITY_KEY = 'currentCity'
@@ -46,18 +47,7 @@ export class HomePage extends Page {
   }
 
   private updateCurrentWeather(container: HTMLElement): void {
-    const oldCurrentWeather = container.querySelector('[data-current-weather]')
-    const oldCurrentHoursWeather = container.querySelector(
-      '[data-current-hours-weather]',
-    )
-    const oldCurrentDaysWeather = container.querySelector(
-      '[data-current-days-weather]',
-    )
-
-    if (oldCurrentWeather) oldCurrentWeather.remove()
-    if (oldCurrentHoursWeather) oldCurrentHoursWeather.remove()
-    if (oldCurrentDaysWeather) oldCurrentDaysWeather.remove()
-
+    this.clearWeather(container)
     if (this.data) {
       this.renderFullWeather(container)
     }
@@ -81,7 +71,9 @@ export class HomePage extends Page {
     this.appendCurrentHoursWeather(container)
     this.appendCurrentDaysWeather(container)
     this.appendFeatures(container)
+    this.appendTimeIndicator(container)
   }
+
   private clearWeather(container: HTMLElement): void {
     const oldCurrentWeather = container.querySelector('[data-current-weather]')
     const oldCurrentHoursWeather = container.querySelector(
@@ -91,11 +83,13 @@ export class HomePage extends Page {
       '[data-current-days-weather]',
     )
     const oldFeatures = container.querySelector('[data-features]')
+    const oldTimeIndicator = container.querySelector('[data-time-indicator]')
 
     if (oldCurrentWeather) oldCurrentWeather.remove()
     if (oldCurrentHoursWeather) oldCurrentHoursWeather.remove()
     if (oldCurrentDaysWeather) oldCurrentDaysWeather.remove()
     if (oldFeatures) oldFeatures.remove()
+    if (oldTimeIndicator) oldTimeIndicator.remove()
   }
 
   private async appendCurrentWeather(container: HTMLElement): Promise<void> {
@@ -110,6 +104,9 @@ export class HomePage extends Page {
 
   private appendFeatures(container: HTMLElement): void {
     container.append(new Features().render())
+  }
+  private appendTimeIndicator(container: HTMLElement): void {
+    container.append(new TimeIndicator(this.data).render())
   }
 
   private async appendCurrentDaysWeather(
@@ -159,6 +156,10 @@ export class HomePage extends Page {
         this.selectedDt,
       ).render(),
     )
+    this.appendCurrentDaysWeather(container)
+    this.appendFeatures(container)
+    this.appendSearch(container)
+    this.appendTimeIndicator(container)
   }
 
   public async render(): Promise<HTMLElement> {

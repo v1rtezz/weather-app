@@ -10,7 +10,6 @@ export class FeaturesCard extends Component {
   private async createElement(): Promise<void> {
     const data: IWeatherResponse | null = await WeatherApi.get(this.city)
     const weather = data.list[0]
-    console.log(weather)
 
     const rainChanceItem = data.list.find((item) => item.pop && item.pop > 0)
     const popPercent = rainChanceItem
