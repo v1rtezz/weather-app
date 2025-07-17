@@ -8,15 +8,17 @@ import { CurrentHoursWeather } from '../components/HoursWeather'
 import { CurrentDaysWeather } from '../components/DaysWeather'
 import { Features } from '../components/Features'
 import { TimeIndicator } from '../components/ui/TimeIndicator'
+import { ThemeSwitcher } from '../components/ui/ThemeSwitcher'
 
 export class HomePage extends Page {
   private CITY_KEY = 'currentCity'
-
   protected data: IWeatherResponse | null = null
   private selectedDt: number | null = null
+
   constructor() {
     super('main')
   }
+
   private async getDataFromLocalstorage(): Promise<void> {
     const city = localStorage.getItem(this.CITY_KEY)
     if (!city) return
@@ -39,11 +41,10 @@ export class HomePage extends Page {
     const container = this.element.querySelector('.container') as HTMLElement
     this.appendSearch(container)
     await this.getDataFromLocalstorage()
-    if (!this.data) {
-      return
-    }
-
+    if (!this.data) return
     this.renderFullWeather(container)
+    this.appendTimeIndicator(container)
+    this.appendThemeSwitcher(container)
   }
 
   private updateCurrentWeather(container: HTMLElement): void {
@@ -61,7 +62,6 @@ export class HomePage extends Page {
       },
       () => this.clearWeather(container),
     )
-
     container.append(search.render())
   }
 
@@ -71,25 +71,20 @@ export class HomePage extends Page {
     this.appendCurrentHoursWeather(container)
     this.appendCurrentDaysWeather(container)
     this.appendFeatures(container)
-    this.appendTimeIndicator(container)
   }
 
   private clearWeather(container: HTMLElement): void {
-    const oldCurrentWeather = container.querySelector('[data-current-weather]')
-    const oldCurrentHoursWeather = container.querySelector(
+    const selectors = [
+      '[data-current-weather]',
       '[data-current-hours-weather]',
-    )
-    const oldCurrentDaysWeather = container.querySelector(
       '[data-current-days-weather]',
-    )
-    const oldFeatures = container.querySelector('[data-features]')
-    const oldTimeIndicator = container.querySelector('[data-time-indicator]')
-
-    if (oldCurrentWeather) oldCurrentWeather.remove()
-    if (oldCurrentHoursWeather) oldCurrentHoursWeather.remove()
-    if (oldCurrentDaysWeather) oldCurrentDaysWeather.remove()
-    if (oldFeatures) oldFeatures.remove()
-    if (oldTimeIndicator) oldTimeIndicator.remove()
+      '[data-features]',
+      '[data-time-indicator]',
+    ]
+    selectors.forEach((selector) => {
+      const el = container.querySelector(selector)
+      if (el) el.remove()
+    })
   }
 
   private async appendCurrentWeather(container: HTMLElement): Promise<void> {
@@ -100,6 +95,9 @@ export class HomePage extends Page {
     container: HTMLElement,
   ): Promise<void> {
     container.append(new CurrentHoursWeather(this.data).render())
+  }
+  private async appendThemeSwitcher(container: HTMLElement): Promise<void> {
+    container.append(new ThemeSwitcher().render())
   }
 
   private appendFeatures(container: HTMLElement): void {
@@ -118,25 +116,20 @@ export class HomePage extends Page {
   private async appendCurrentDaysWeather(
     container: HTMLElement,
   ): Promise<void> {
-    container.append(
-      this.selectedDt !== null
-        ? new CurrentDaysWeather(
-            this.data,
-            (dt) => {
-              this.selectedDt = dt
-              this.updateCurrentWeatherForDay(container, dt)
-            },
-            this.selectedDt,
-          ).render()
-        : new CurrentDaysWeather(this.data, (dt) => {
-            this.selectedDt = dt
-            this.updateCurrentWeatherForDay(container, dt)
-          }).render(),
+    const daysWeather = new CurrentDaysWeather(
+      this.data,
+      (dt) => {
+        this.selectedDt = dt
+        this.updateCurrentWeatherForDay(container, dt)
+      },
+      this.selectedDt ?? undefined,
     )
+    container.append(daysWeather.render())
   }
 
   private updateCurrentWeatherForDay(container: HTMLElement, dt: number): void {
     if (!this.data) return
+
     const selectedDate = new Date(dt * 1000)
     const filteredList = this.data.list.filter((item) => {
       const itemDate = new Date(item.dt * 1000)
@@ -146,9 +139,12 @@ export class HomePage extends Page {
         itemDate.getDate() === selectedDate.getDate()
       )
     })
+
     if (filteredList.length === 0) return
+
     this.selectedDt = dt
     this.clearWeather(container)
+
     container.append(
       new CurrentWeather({ ...this.data, list: filteredList }).render(),
     )
@@ -164,6 +160,7 @@ export class HomePage extends Page {
     )
     this.appendFeatures(container)
     this.appendTimeIndicator(container)
+    this.appendThemeSwitcher(container)
   }
 
   public async render(): Promise<HTMLElement> {

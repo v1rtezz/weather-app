@@ -14,9 +14,6 @@ export class DaysWeatherCard extends Component {
     const day = date
       .toLocaleDateString('ru-RU', { weekday: 'short' })
       .toUpperCase()
-    const dayEn = date
-      .toLocaleDateString('en-US', { weekday: 'long' })
-      .toLowerCase()
 
     this.element.innerHTML = `
       <div>
