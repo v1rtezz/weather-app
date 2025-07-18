@@ -34,6 +34,8 @@ body {
   font-weight: 400;
   color: var(--neutral-color-103);
   background-color: var(--neutral-color-10);
+  display: flex;
+  justify-content: center;
 }
 
 .no-scroll {

@@ -9,8 +9,8 @@
   box-shadow:
     0 2px 8px rgba(0, 0, 0, 0.15),
     0 0 15px rgba(255, 255, 255, 0.07);
-  margin: auto auto;
   max-width: 600px;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -351,7 +351,7 @@
 @media (min-width: 600px) {
   .app {
     margin: 15px;
-    max-width: 100%;
+    max-width: 1200px;
   }
   .header__title {
     font-size: 35px;
@@ -407,4 +407,34 @@
   }
 }
 
-
+@media (min-width: 1200px) {
+  .header__title {
+    font-size: 48px;
+  }
+  .search__input {
+    font-size: 28px;
+    height: 60px;
+  }
+  .current__city {
+    font-size: 38px;
+  }
+  .current__temp-value {
+    font-size: 64px;
+  }
+  .current__weather-description {
+    font-size: 32px;
+  }
+  .current__weather-detail-label,
+  .current__weather-detail-value {
+    font-size: 24px;
+  }
+  .features__card-title {
+    font-size: 32px;
+  }
+  .features__card-deg {
+    font-size: 34px;
+  }
+  .features__card-rain-chance {
+    font-size: 32px;
+  }
+}
