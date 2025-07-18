@@ -1,7 +1,7 @@
 var S=Object.defineProperty;var E=(n,t,e)=>t in n?S(n,t,{enumerable:!0,configurable:!0,writable:!0,value:e}):n[t]=e;var d=(n,t,e)=>E(n,typeof t!="symbol"?t+"":t,e);(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const s of document.querySelectorAll('link[rel="modulepreload"]'))r(s);new MutationObserver(s=>{for(const a of s)if(a.type==="childList")for(const i of a.addedNodes)i.tagName==="LINK"&&i.rel==="modulepreload"&&r(i)}).observe(document,{childList:!0,subtree:!0});function e(s){const a={};return s.integrity&&(a.integrity=s.integrity),s.referrerPolicy&&(a.referrerPolicy=s.referrerPolicy),s.crossOrigin==="use-credentials"?a.credentials="include":s.crossOrigin==="anonymous"?a.credentials="omit":a.credentials="same-origin",a}function r(s){if(s.ep)return;s.ep=!0;const a=e(s);fetch(s.href,a)}})();class c{constructor(t,e,r){d(this,"element");this.element=document.createElement(t),this.element.className=e,r&&this.element.setAttribute(r,"")}}class M extends c{constructor(){super("header","header")}createElement(){this.element.innerHTML=` 
           <img
             class="logo"
-            src="/logo.png"
+            src="./logo.png"
             alt=""
             width="100"
             height="100"
