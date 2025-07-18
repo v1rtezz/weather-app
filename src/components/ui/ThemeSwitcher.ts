@@ -38,7 +38,12 @@ export class ThemeSwitcher extends Component {
     }
 
     const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null
-    const defaultTheme = savedTheme ?? 'light'
+    const systemThemePref = window.matchMedia('(prefers-color-scheme: dark)')
+      .matches
+      ? 'dark'
+      : 'light'
+    const defaultTheme = savedTheme ?? systemThemePref
+
     setTheme(defaultTheme)
 
     input?.addEventListener('change', () => {

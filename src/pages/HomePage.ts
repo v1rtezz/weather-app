@@ -40,11 +40,14 @@ export class HomePage extends Page {
   protected async createPage(): Promise<void> {
     const container = this.element
     this.appendSearch(container)
+    this.appendThemeSwitcher(container)
+
     await this.getDataFromLocalstorage()
-    if (!this.data) return
+    if (!this.data) {
+      return
+    }
     this.renderFullWeather(container)
     this.appendTimeIndicator(container)
-    this.appendThemeSwitcher(container)
   }
 
   private updateCurrentWeather(container: HTMLElement): void {
