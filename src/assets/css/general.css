@@ -23,7 +23,7 @@
 .time-indicator {
   position: absolute;
   left: 25px;
-  top: 25px;
+  top: 60px;
   width: 70px;
 }
 body {
@@ -32,9 +32,8 @@ body {
     'Helvetica Neue', sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: var(--neutral-color-100);
+  color: var(--neutral-color-103);
   background-color: var(--neutral-color-10);
-  padding: 50px 0;
 }
 
 .no-scroll {
@@ -42,12 +41,12 @@ body {
 }
 
 section {
-  margin-bottom: 40px;
+  margin-bottom: 25px;
 }
 
 .title {
   margin-bottom: 10px;
-  font-size: 30px;
+  font-size: 28px;
 }
 
 .forecast-cards {
@@ -57,10 +56,11 @@ section {
   gap: 10px;
 }
 .forecast-card {
+  color: var(--neutral-color-103);
   display: flex;
   align-items: start;
   gap: 10px;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--neutral-color-102);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-radius: 16px;
@@ -69,6 +69,7 @@ section {
   box-shadow:
     0 4px 10px rgba(0, 0, 0, 0.25),
     0 0 30px rgba(255, 255, 255, 0.1);
+  width: 47%;
 }
 
 .forecast-card img {
@@ -79,4 +80,21 @@ section {
 }
 .forecast-card-deg {
   font-size: 20px;
+}
+
+@media (min-width: 600px) {
+  .title {
+    margin-bottom: 10px;
+    font-size: 30px;
+  }
+
+  section {
+    margin-bottom: 40px;
+  }
+}
+
+@media (min-width: 768px) {
+  .forecast-card {
+    width: 30%;
+  }
 }

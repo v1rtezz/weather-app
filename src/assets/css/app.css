@@ -4,7 +4,7 @@
   backdrop-filter: blur(10px) saturate(180%);
   -webkit-backdrop-filter: blur(10px) saturate(180%);
   border-radius: 16px;
-  padding: 15px 20px;
+  padding: 45px 20px;
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow:
     0 2px 8px rgba(0, 0, 0, 0.15),
@@ -12,13 +12,6 @@
   margin: auto auto;
   max-width: 600px;
   overflow: hidden;
-}
-
-.app:has(.settings-window--active) {
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  border: none;
-  box-shadow: none;
 }
 
 .logo {
@@ -36,7 +29,7 @@
 .header__title {
   text-align: center;
   font-weight: bold;
-  font-size: 35px;
+  font-size: 28px;
   letter-spacing: 1.2px;
   line-height: 1.3;
 }
@@ -44,7 +37,7 @@
 .search__form {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 20px;
 }
 
 .search__input,
@@ -57,8 +50,8 @@
 .search__input {
   border-bottom: 1px solid var(--neutral-color-100);
   width: 100%;
-  height: 50px;
-  font-size: 23px;
+  height: 35px;
+  font-size: 20px;
   transition: var(--transition);
   color: var(--neutral-color-100);
 }
@@ -146,19 +139,12 @@
   width: 50px;
 }
 .current__weather-description {
-  font-size: 26px;
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 .current__weather-description p {
   margin-bottom: 0;
   display: inline;
-}
-
-.current__weather-description p::after {
-  content: ', ';
-}
-
-.current__weather-description p:last-of-type::after {
-  content: '';
 }
 
 .current__weather-details {
@@ -167,12 +153,12 @@
   flex-wrap: wrap;
 }
 .current__weather-detail {
-  margin-top: 25px;
   background: rgba(255, 255, 255, 0.1);
   padding: 10px 15px;
   border-radius: 8px;
   text-align: center;
   min-width: 80px;
+  width: 47%;
 }
 .current__weather-detail-label {
   font-size: 18px;
@@ -205,11 +191,12 @@
 .features__cards {
 }
 .features__card {
+  color: var(--neutral-color-103);
   display: flex;
   margin-bottom: 20px;
   justify-content: space-between;
   align-items: center;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--neutral-color-102);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-radius: 16px;
@@ -219,7 +206,7 @@
     0 4px 10px rgba(0, 0, 0, 0.25),
     0 0 30px rgba(255, 255, 255, 0.1);
   width: 100%;
-  text-align-last: left;
+  text-align: left;
   transition: var(--transition);
   cursor: pointer;
 }
@@ -236,13 +223,13 @@
 .features__card-left {
 }
 .features__card-title {
-  font-size: 30px;
+  font-size: 24px;
 }
 .features__card-deg {
-  font-size: 30px;
+  font-size: 26px;
 }
 .features__card-rain-chance {
-  font-size: 22px;
+  font-size: 25px;
 }
 
 .features__card-right {
@@ -253,10 +240,9 @@
   margin-left: auto;
 }
 
-
 .switch-wrapper {
   position: absolute;
-  top: 45px;
+  top: 75px;
   right: 30px;
 }
 
@@ -281,14 +267,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #73C0FC;
-  transition: .4s;
+  background-color: #73c0fc;
+  transition: 0.4s;
   border-radius: 30px;
 }
 
 .slider:before {
   position: absolute;
-  content: "";
+  content: '';
   height: 40px;
   width: 40px;
   border-radius: 20px;
@@ -296,7 +282,7 @@
   bottom: 2px;
   z-index: 2;
   background-color: #e8e8e8;
-  transition: .4s;
+  transition: 0.4s;
 }
 
 .sun svg {
@@ -309,7 +295,7 @@
 }
 
 .moon svg {
-  fill: #73C0FC;
+  fill: #73c0fc;
   position: absolute;
   top: 8px;
   left: 8px;
@@ -323,8 +309,12 @@
 }
 
 @keyframes rotate {
-  0% { transform: rotate(0); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .moon svg {
@@ -332,10 +322,18 @@
 }
 
 @keyframes tilt {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(-10deg); }
-  75% { transform: rotate(10deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .input:checked + .slider {
@@ -349,3 +347,64 @@
 .input:checked + .slider:before {
   transform: translateX(36px);
 }
+
+@media (min-width: 600px) {
+  .app {
+    margin: 15px;
+    max-width: 100%;
+  }
+  .header__title {
+    font-size: 35px;
+  }
+  .search__form {
+    gap: 40px;
+  }
+  .search__input {
+    height: 50px;
+    font-size: 23px;
+  }
+}
+
+@media (min-width: 768px) {
+  .features__cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .features__card {
+    padding: 20px 30px;
+    width: 49%;
+    margin-bottom: 0;
+  }
+
+  .features__card:hover {
+    opacity: 0.7;
+    transform: scale(0.9);
+  }
+  .features__card:active {
+    opacity: 0.9;
+    transform: scale(0.95);
+  }
+
+  .features__card-left {
+  }
+  .features__card-title {
+    font-size: 24px;
+  }
+  .features__card-deg {
+    font-size: 26px;
+  }
+  .features__card-rain-chance {
+    font-size: 25px;
+  }
+
+  .features__card-right {
+    flex-grow: 1;
+  }
+  .features__card-img {
+    height: 100px;
+    margin-left: auto;
+  }
+}
+
+

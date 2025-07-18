@@ -19,7 +19,7 @@ export class Search extends Component {
             type="text"
             class="search__input"
             data-search-input
-            placeholder="Нью-Йорк, Соединенные штаты Америки"
+            placeholder="Нью-Йорк"
             data-search-input
           />
 

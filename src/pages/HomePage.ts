@@ -38,7 +38,7 @@ export class HomePage extends Page {
   }
 
   protected async createPage(): Promise<void> {
-    const container = this.element.querySelector('.container') as HTMLElement
+    const container = this.element
     this.appendSearch(container)
     await this.getDataFromLocalstorage()
     if (!this.data) return
@@ -71,6 +71,7 @@ export class HomePage extends Page {
     this.appendCurrentHoursWeather(container)
     this.appendCurrentDaysWeather(container)
     this.appendFeatures(container)
+    this.appendTimeIndicator(container)
   }
 
   private clearWeather(container: HTMLElement): void {
@@ -101,11 +102,15 @@ export class HomePage extends Page {
   }
 
   private appendFeatures(container: HTMLElement): void {
+    const old = container.querySelector('[data-features]')
+    if (old) old.remove()
+
     const features = new Features(async (city: string) => {
       localStorage.setItem(this.CITY_KEY, city)
       await this.fetchData(city)
       this.renderFullWeather(container)
     })
+
     container.append(features.render())
   }
 
