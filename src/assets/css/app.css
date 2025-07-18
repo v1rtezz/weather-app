@@ -80,7 +80,7 @@
 }
 
 .current {
-  background: rgba(255, 255, 255, 0.2);
+  background: #ffffff33;
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-radius: 16px;
@@ -153,7 +153,7 @@
   flex-wrap: wrap;
 }
 .current__weather-detail {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--neutral-color-104);
   padding: 10px 15px;
   border-radius: 8px;
   text-align: center;

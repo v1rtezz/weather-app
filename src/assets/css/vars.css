@@ -5,6 +5,7 @@
   --neutral-color-101: #5f5f5f;
   --neutral-color-102: #ffffff33;
   --neutral-color-103: #fff;
+  --neutral-color-104: #ffffff1a;
 }
 
 body[data-theme='light'] {
@@ -12,4 +13,5 @@ body[data-theme='light'] {
   --neutral-color-100: #242424;
   --neutral-color-101: #fff;
   --neutral-color-103: #242424;
+  --neutral-color-104: #4f4a4a1a;
 }
