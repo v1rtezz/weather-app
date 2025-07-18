@@ -8,7 +8,7 @@ export class Header extends Component {
     this.element.innerHTML = ` 
           <img
             class="logo"
-            src="/logo.png"
+            src="./logo.png"
             alt=""
             width="100"
             height="100"
