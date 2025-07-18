@@ -168,7 +168,6 @@ export class HomePage extends Page {
     )
     this.appendFeatures(container)
     this.appendTimeIndicator(container)
-    this.appendThemeSwitcher(container)
   }
 
   public async render(): Promise<HTMLElement> {
