@@ -237,10 +237,12 @@
 }
 
 .features__card-right {
+  flex-shrink: 0;
   flex-grow: 1;
 }
 .features__card-img {
   height: 100px;
+  flex-shrink: 0;
   margin-left: auto;
 }
 

@@ -18,5 +18,3 @@ class App {
 }
 
 new App().init()
-
-let element: string = 'Hello, World!'
