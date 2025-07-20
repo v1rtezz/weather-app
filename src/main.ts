@@ -13,6 +13,10 @@ class App {
     this.root.append(new Header().render())
     this.root.append(await new HomePage().render())
   }
+
+
 }
 
 new App().init()
+
+let element: string = 'Hello, World!'

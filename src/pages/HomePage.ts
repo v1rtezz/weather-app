@@ -19,7 +19,7 @@ export class HomePage extends Page {
     super('main')
   }
 
-  private async getDataFromLocalstorage(): Promise<void> {
+  private async getCurrentCityFromLocalstorage(): Promise<void> {
     const city = localStorage.getItem(this.CITY_KEY)
     if (!city) return
     await this.fetchData(city)
@@ -42,7 +42,7 @@ export class HomePage extends Page {
     this.appendSearch(container)
     this.appendThemeSwitcher(container)
 
-    await this.getDataFromLocalstorage()
+    await this.getCurrentCityFromLocalstorage()
     if (!this.data) {
       return
     }
@@ -52,6 +52,7 @@ export class HomePage extends Page {
 
   private updateCurrentWeather(container: HTMLElement): void {
     this.clearWeather(container)
+
     if (this.data) {
       this.renderFullWeather(container)
     }

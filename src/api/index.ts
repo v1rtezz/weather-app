@@ -36,19 +36,33 @@ export class Api {
 
     return data as ResponseData
   }
-
-  public get<ResponseData = unknown>(
+  
+  public async get<ResponseData = unknown>(
     endpoint: string,
     options: RequestInit = {},
   ): Promise<ResponseData> {
-    return this.request<ResponseData>(
-      endpoint,
-      {
-        ...options,
-        method: 'GET',
-      },
-      this.apiKey,
-    )
+    const maxTries = 3
+    let lastError: unknown
+
+    for (let attempt = 1; attempt <= maxTries; attempt++) {
+      try {
+        return await this.request<ResponseData>(
+          endpoint,
+          {
+            ...options,
+            method: 'GET',
+          },
+          this.apiKey,
+        )
+      } catch (error) {
+        lastError = error
+        if (attempt < maxTries) {
+          await new Promise((res) => setTimeout(res, 300))
+        }
+      }
+    }
+
+    throw lastError
   }
 }
 

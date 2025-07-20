@@ -190,6 +190,10 @@
 
 .features__cards {
 }
+.features:has(.features__cards:not(:has(.features__card))) {
+  display: none;
+}
+
 .features__card {
   color: var(--neutral-color-103);
   display: flex;

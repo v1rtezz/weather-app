@@ -18,24 +18,6 @@ export class ModalInit {
     const openBtn = document.querySelector(openBtnSelector)
     const closeBtn = document.querySelector(closeBtnSelector)
 
-    if (!modal) {
-      throw new Error(
-        `Modal: не найден элемент по селектору "${modalSelector}"`,
-      )
-    }
-
-    if (!openBtn) {
-      throw new Error(
-        `Modal: не найден элемент по селектору "${openBtnSelector}"`,
-      )
-    }
-
-    if (!closeBtn) {
-      throw new Error(
-        `Modal: не найден элемент по селектору "${closeBtnSelector}"`,
-      )
-    }
-
     if (!modal || !openBtn || !closeBtn) {
       throw new Error('Modal: один из селекторов не нашёл элемент в DOM')
     }

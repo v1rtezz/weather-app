@@ -8,4 +8,4 @@ export class WeatherApi {
       `/data/2.5/forecast?q=${encodedCity}&units=metric&lang=ru`
     )
   }
-}
+} 

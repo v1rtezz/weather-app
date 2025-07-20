@@ -1,10 +1,14 @@
-import globals from 'globals';
-import pluginJs from '@eslint/js';
-import prettierPlugin from 'eslint-plugin-prettier';
-import eslintConfigPrettier from 'eslint-config-prettier';
+import globals from 'globals'
+import pluginJs from '@eslint/js'
+import prettierPlugin from 'eslint-plugin-prettier'
+import prettierPlugin from '@typescript-eslint/parser'
+import prettierPlugin from '@typescript-eslint/eslint-plugin'
+import eslintConfigPrettier from 'eslint-config-prettier'
+import tseslint from 'typescript-eslint'
 
-export default [
+export default tseslint.config(
   {
+    files: ['**/*.js', '**/*.ts', '**/*.tsx'],
     languageOptions: {
       globals: {
         ...globals.browser,
@@ -42,4 +46,4 @@ export default [
   {
     ignores: ['node_modules', 'dist'],
   },
-];
+)

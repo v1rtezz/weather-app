@@ -93,32 +93,26 @@ export class CurrentWeather extends Component {
 `
 
     const favBtn = this.element.querySelector('.current__btn')
-   if (favBtn) {
-  favBtn.addEventListener('click', () => {
-    if (!this.data) return
-    const city = this.data.city.name
-    const isActive = favBtn.classList.contains('current__btn--active')
+    if (favBtn) {
+      favBtn.addEventListener('click', () => {
+        if (!this.data) return
+        const city = this.data.city.name
+        const isActive = favBtn.classList.contains('current__btn--active')
 
-    if (isActive) {
-      // Убираем из избранного
-      removeFavorite(city)
-      favBtn.classList.remove('current__btn--active')
-      console.log(`Удалён из избранного: ${city}`)
-    } else {
-      // Добавляем в избранное
-      addFavorite(city)
-      favBtn.classList.add('current__btn--active')
-      console.log(`Добавлен в избранное: ${city}`)
+        if (isActive) {
+          removeFavorite(city)
+          favBtn.classList.remove('current__btn--active')
+        } else {
+          addFavorite(city)
+          favBtn.classList.add('current__btn--active')
+        }
+
+        const oldFeatures = document.querySelector('[data-features]')
+        if (oldFeatures) oldFeatures.remove()
+        const newFeatures = new Features().render()
+        document.querySelector('[data-app]')?.append(newFeatures)
+      })
     }
-
-    // Перерисовываем блок избранного
-    const oldFeatures = document.querySelector('[data-features]')
-    if (oldFeatures) oldFeatures.remove()
-    const newFeatures = new Features().render()
-    document.querySelector('[data-app]')?.append(newFeatures)
-  })
-}
-
 
     if (favBtn && this.data) {
       const isFavorite = getFavorites().includes(this.data.city.name)
