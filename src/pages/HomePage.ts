@@ -119,6 +119,8 @@ export class HomePage extends Page {
   }
 
   private appendTimeIndicator(container: HTMLElement): void {
+    const old = container.querySelector('[data-time-indicator]')
+    if (old) old.remove()
     container.append(new TimeIndicator(this.data).render())
   }
 
